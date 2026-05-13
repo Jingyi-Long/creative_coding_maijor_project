@@ -28,9 +28,13 @@ We aim to transform this static abstract painting into a dynamic interactive art
 [Description]
 
 ### Time-based — own by Yuming Cong
-Our project was inspired by Wassily Kandinsky’s belief that painting could function like music through rhythm, emotion, and composition. In Composition VIII, geometric forms, lines, and colours are arranged with a strong sense of visual rhythm. In our group project, I am responsible for designing the time-based changes within the visual system.
+Our project was inspired by Wassily Kandinsky’s belief that **painting could function like music through rhythm, emotion, and composition.** In Composition VIII, geometric forms, lines, and colours are arranged with a strong sense of visual rhythm. In our group project, I am responsible for designing the time-based visual evolution of the system, using alpha blending to support continuous trajectory retention.
 
-I plan to structure the visuals through stages similar to musical progression: introduction, build-up, climax, and resolution. At the beginning, the composition will remain minimal and balanced, with large concentric circles drifting slowly and expanding gently, while diagonal lines move with subtle oscillation. As the visual rhythm develops, circles will pulse more frequently, lines will overlap and shift direction, and triangles will rotate faster to increase visual tension. Additional geometric forms and particles will gradually appear, creating denser layers and more complex movement. During the climax stage, colour contrast and motion intensity will reach their peak before gradually slowing and returning to a calmer composition.
+This mechanic is structured through stages similar to musical progression: **introduction, build-up, climax, and resolution.**
+At the beginning, the composition remains minimal and balanced. Large concentric circles drift slowly and expand gently, while diagonal lines move with subtle oscillation. Trails are short-lived and quickly fade, maintaining a clear and spacious composition.
+As the visual rhythm develops, circles pulse more frequently, lines overlap and shift direction, and triangles rotate faster to increase visual tension. Movement becomes more active, and trails last longer, gradually building visual density through overlapping paths. Additional geometric forms and particles also begin to appear, creating more layered and complex movement.
+During the climax stage, motion and interaction reach their highest intensity. Trails persist and accumulate, forming a dense layered “memory” of movement, while colour contrast becomes stronger and the overall composition becomes more dynamic.
+Finally, in the resolution stage, movement gradually slows and trails begin to fade again, returning the composition to a calmer and more balanced state.
 
 The user will not directly interact with this mechanic, but instead experience the artwork continuously evolving over time.
 
