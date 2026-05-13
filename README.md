@@ -20,7 +20,7 @@ We aim to transform this static abstract painting into a dynamic interactive art
 | Name | uid | Mechanic |
 |------|--------|----------|
 | [Member 1 Name] | [jlon6684](https://github.com/username1) | Audio |
-| [Member 2 Name] | [ycon0930](https://github.com/MiiiiinG03) | Time-based |
+| [Yuming Cong] | [ycon0930](https://github.com/MiiiiinG03) | Time-based |
 | [Zichen Feng] | [zfen0688](https://github.com/zf0688) | Perlin noise & randomness |
 | [Xiaoyu Xia] | [xxia0518](https://github.com/xxia0518) | User input |
 
@@ -37,6 +37,8 @@ During the climax stage, motion and interaction reach their highest intensity. T
 Finally, in the resolution stage, movement gradually slows and trails begin to fade again, returning the composition to a calmer and more balanced state.
 
 The user will not directly interact with this mechanic, but instead experience the artwork continuously evolving over time.
+
+![An image of sketch](Sketch.jpg)
 
 ### Perlin Noise & Randomness — own by Zichen Feng
 The audio mechanic plays a music track and uses the p5.sound library's FFT analyser to split the sound into three frequency bands: low, mid, and high. Each band controls a different family of shapes from Composition VIII.
