@@ -1,16 +1,4 @@
-# Creative Coding Maijor Project
-# [Project Title]111
-
-A creative coding interactive piece built with p5.js for the Creative Coding final assessment.
-
-## Team Members
-
-| Name | GitHub | Mechanic |
-|------|--------|----------|
-| [Member 1 Name] | [@username1](https://github.com/username1) | Audio |
-| [Member 2 Name] | [@username2](https://github.com/username2) | Time-based |
-| [Zichen Feng] | [zfen0688@uni.sydney.edu.au](https://github.com/username3) | Perlin noise & randomness |
-| [Member 4 Name] | [@username4](https://github.com/username4) | User input |
+# IDEA9103 Major Project 
 
 ## Project Overview
 
@@ -22,40 +10,42 @@ Our project draws inspiration from Wassily Kandinsky’s __Composition VIII (192
 We aim to transform this static abstract painting into a dynamic interactive artwork where viewers can influence geometric elements through sound, mouse interaction, and time-based changes. We were also inspired by Google Arts & Culture’s Play a Kandinsky project, as well as generative art and abstract motion graphics, to create an immersive audiovisual experience that combines movement, rhythm, and interaction.
 
 ![An image of Composition VIII](readmeImages/image.png)
+*Wassily Kandinsky, Composition VIII, 1923, oil on canvas, 140 × 201 cm. Solomon R. Guggenheim Museum, New York.*
 
-## Techniques
+---
 
-The project uses the following p5.js techniques and features:
+## Part 2: Mechanics
+### Team Members
 
-- **Canvas rendering**: 
-- **Audio analysis**:
-- **Perlin noise**:
-- **Event handling**: 
-- **Other techniques**:
+| Name | uid | Mechanic |
+|------|--------|----------|
+| [Member 1 Name] | [jlon6684](https://github.com/username1) | Audio |
+| [Member 2 Name] | [uid](https://github.com/username2) | Time-based |
+| [Zichen Feng] | [zfen0688](https://github.com/zf0688) | Perlin noise & randomness |
+| [Member 4 Name] | [uid](https://github.com/username4) | User input |
 
-### Key Design Decisions
+### Audio — own by Jingyi Long
+The audio mechanic plays a music track and uses the p5.sound library's FFT analyser to split the sound into three frequency bands: low, mid, and high. Each band controls a different family of shapes from Composition VIII.
+Low frequencies (bass) drive the large black concentric circle in the upper-left corner, making it grow and pulse with the beat. Mid frequencies control the brightness of the yellow and violet discs, so they glow softly when the melody is active. High frequencies trigger quick flashes along the diagonal lines and sharpen the edges of the triangles when cymbals or other high sounds hit.
+The user does not need to do anything except press play. Once the track starts, the painting responds to the music in real time, so watching and listening happen together.
+This connects to our Part 1 vision because Kandinsky thought of Composition VIII as a kind of visual music. He believed shapes and colours could behave like sounds. Our mechanic brings that idea to life by letting real sound actually move the shapes he painted.
 
-[Explain a few important choices your team made. For example: why you chose a particular colour palette, why mechanics interact in a specific way, or why you structured the code modularly.]
-
-## Mechanic Ownership
-
-Each member acted as the creative director for one mechanic:
-
-### Audio — [Member 1 Name]
-[Description ]
-
-### Time-based — [Member 2 Name]
+### Time-based — own by Member 2 Name
 [Description]
 
-### Perlin Noise & Randomness — [Member 3 Name]
+### Perlin Noise & Randomness — own by Zichen Feng
 [Description]
 
-### User Input — [Member 4 Name]
+### User Input — own by Member 4 Name
 [Description]
 
-## Interaction Instructions
+---
 
-To experience the work:
+## Part 3: Putting It Together 
+placeholder
 
-## File Structure
-etc.
+---
+ 
+## References
+placeholder
+
