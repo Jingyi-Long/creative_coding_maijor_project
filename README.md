@@ -28,7 +28,11 @@ We aim to transform this static abstract painting into a dynamic interactive art
 [Description]
 
 ### Time-based — own by Yuming Cong
-[Description]
+Our project was inspired by Wassily Kandinsky’s belief that painting could function like music through rhythm, emotion, and composition. In Composition VIII, geometric forms, lines, and colours are arranged with a strong sense of visual rhythm. In our group project, I am responsible for designing the time-based changes within the visual system.
+
+I plan to structure the visuals through stages similar to musical progression: introduction, build-up, climax, and resolution. At the beginning, the composition will remain minimal and balanced, with large concentric circles drifting slowly and expanding gently, while diagonal lines move with subtle oscillation. As the visual rhythm develops, circles will pulse more frequently, lines will overlap and shift direction, and triangles will rotate faster to increase visual tension. Additional geometric forms and particles will gradually appear, creating denser layers and more complex movement. During the climax stage, colour contrast and motion intensity will reach their peak before gradually slowing and returning to a calmer composition.
+
+The user will not directly interact with this mechanic, but instead experience the artwork continuously evolving over time.
 
 ### Perlin Noise & Randomness — own by Zichen Feng
 The audio mechanic plays a music track and uses the p5.sound library's FFT analyser to split the sound into three frequency bands: low, mid, and high. Each band controls a different family of shapes from Composition VIII.
