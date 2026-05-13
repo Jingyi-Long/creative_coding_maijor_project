@@ -44,9 +44,7 @@ This connects to our Part 1 vision because Kandinsky thought of Composition VIII
 ---
 
 ## Part 3: Putting It Together 
-placeholder
-
----
+The four mechanics will coexist within a single dynamic abstract canvas, exploring the geometric composition and musicality of Kandinsky’s *Composition VIII*. The Audio mechanic will alter the movement and rhythm of the graphics in response to sound; the Time-based mechanic controls the continuous evolution of the visuals over time; Perlin Noise and random variations create a sense of natural flow in the background and geometric elements; whilst the User Input mechanic allows the audience to interact with the visuals via the mouse, influencing the graphical changes. A unified set of geometric elements, colour palette and abstract visual language ties the entire work together, transforming it into a digital art experience characterised by rhythm, interactivity and immersion.
  
 ## References
 placeholder
