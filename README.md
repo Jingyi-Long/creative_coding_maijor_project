@@ -46,10 +46,23 @@ This connects to our Part 1 vision because Kandinsky thought of Composition VIII
 
 ![An image of sketch](readmeImages/sketch.png)
 
-### User Input — own by Member 4 Name
-[Description]
+### User Input — owned by Xiaoyu Xia
 
----
+The user input mechanic allows the audience to directly interact with the geometric composition through mouse movement and clicks, inspired by Google Arts & Culture's *Play a Kandinsky* project and Kandinsky's synesthesia colour theory.
+
+When the mouse moves across the canvas, nearby geometric shapes respond to the cursor's proximity. Circles expand outward or produce ripple effects, lines bend or oscillate, and triangles rotate or shift colour. The closer the cursor is to a shape, the stronger the visual response; when the mouse moves away, shapes gradually return to their original state.
+
+Different colour regions react in distinct ways based on Kandinsky's colour-sound associations. Yellow areas respond with quick, energetic movements, reflecting Kandinsky's association of yellow with trumpets. Blue areas react more slowly and softly, echoing the calm of an organ. Red areas produce moderate, balanced responses in between the two.
+
+Additionally, clicking on the canvas sends a ripple wave outward from the click position. As the wave passes through geometric elements, each shape briefly reacts, creating the sensation of "playing" the painting like a musical instrument.
+
+This mechanic is the only one that requires active participation from the viewer, complementing the automatic behaviours of the audio, time-based, and Perlin noise mechanics. It gives the audience a sense of personal agency and transforms the experience from passive observation into direct creative engagement with Kandinsky's visual language.
+
+![Play a Kandinsky interactive interface](readmeImages/playakandinsky.png)
+*Google Arts & Culture, Play a Kandinsky, 2021. Users can click on different colour regions of Kandinsky's Yellow-Red-Blue to hear the sounds he associated with each colour and shape.*
+
+**References:**
+- Google Arts & Culture & Centre Pompidou, *Play a Kandinsky*, 2021. Available at: https://artsandculture.google.com/experiment/play-a-kandinsky/sgF5ivv105ukhA
 
 ## Part 3: Putting It Together 
 The four mechanics will coexist within a single dynamic abstract canvas, exploring the geometric composition and musicality of Kandinsky’s *Composition VIII*. The Audio mechanic will alter the movement and rhythm of the graphics in response to sound; the Time-based mechanic controls the continuous evolution of the visuals over time; Perlin Noise and random variations create a sense of natural flow in the background and geometric elements; whilst the User Input mechanic allows the audience to interact with the visuals via the mouse, influencing the graphical changes. A unified set of geometric elements, colour palette and abstract visual language ties the entire work together, transforming it into a digital art experience characterised by rhythm, interactivity and immersion.
