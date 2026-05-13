@@ -22,7 +22,7 @@ We aim to transform this static abstract painting into a dynamic interactive art
 | [Member 1 Name] | [jlon6684](https://github.com/username1) | Audio |
 | [Member 2 Name] | [ycon0930](https://github.com/MiiiiinG03) | Time-based |
 | [Zichen Feng] | [zfen0688](https://github.com/zf0688) | Perlin noise & randomness |
-| [Member 4 Name] | [uid](https://github.com/username4) | User input |
+| [Xiaoyu Xia] | [xxia0518](https://github.com/xxia0518) | User input |
 
 ### Audio — own by Jingyi Long
 [Description]
