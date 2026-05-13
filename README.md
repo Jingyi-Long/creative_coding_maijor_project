@@ -21,7 +21,7 @@ Our project draws inspiration from Wassily Kandinsky’s __Composition VIII (192
 
 We aim to transform this static abstract painting into a dynamic interactive artwork where viewers can influence geometric elements through sound, mouse interaction, and time-based changes. We were also inspired by Google Arts & Culture’s Play a Kandinsky project, as well as generative art and abstract motion graphics, to create an immersive audiovisual experience that combines movement, rhythm, and interaction.
 
-![An image of Composition VIII](readmeImages/image.jpg)
+![An image of Composition VIII](readmeImages/image.png)
 
 ## Techniques
 
