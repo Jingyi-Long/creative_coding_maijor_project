@@ -25,18 +25,18 @@ We aim to transform this static abstract painting into a dynamic interactive art
 | [Member 4 Name] | [uid](https://github.com/username4) | User input |
 
 ### Audio — own by Jingyi Long
+[Description]
+
+### Time-based — own by Member 2 Name
+[Description]
+
+### Perlin Noise & Randomness — own by Zichen Feng
 The audio mechanic plays a music track and uses the p5.sound library's FFT analyser to split the sound into three frequency bands: low, mid, and high. Each band controls a different family of shapes from Composition VIII.
 Low frequencies (bass) drive the large black concentric circle in the upper-left corner, making it grow and pulse with the beat. Mid frequencies control the brightness of the yellow and violet discs, so they glow softly when the melody is active. High frequencies trigger quick flashes along the diagonal lines and sharpen the edges of the triangles when cymbals or other high sounds hit.
 The user does not need to do anything except press play. Once the track starts, the painting responds to the music in real time, so watching and listening happen together.
 This connects to our Part 1 vision because Kandinsky thought of Composition VIII as a kind of visual music. He believed shapes and colours could behave like sounds. Our mechanic brings that idea to life by letting real sound actually move the shapes he painted.
 
 ![An image of sketch](readmeImages/sketch.png)
-
-### Time-based — own by Member 2 Name
-[Description]
-
-### Perlin Noise & Randomness — own by Zichen Feng
-[Description]
 
 ### User Input — own by Member 4 Name
 [Description]
