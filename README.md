@@ -20,14 +20,14 @@ We aim to transform this static abstract painting into a dynamic interactive art
 | Name | uid | Mechanic |
 |------|--------|----------|
 | [Member 1 Name] | [jlon6684](https://github.com/username1) | Audio |
-| [Member 2 Name] | [uid](https://github.com/username2) | Time-based |
+| [Member 2 Name] | [ycon0930](https://github.com/MiiiiinG03) | Time-based |
 | [Zichen Feng] | [zfen0688](https://github.com/zf0688) | Perlin noise & randomness |
 | [Member 4 Name] | [uid](https://github.com/username4) | User input |
 
 ### Audio — own by Jingyi Long
 [Description]
 
-### Time-based — own by Member 2 Name
+### Time-based — own by Yuming Cong
 [Description]
 
 ### Perlin Noise & Randomness — own by Zichen Feng
