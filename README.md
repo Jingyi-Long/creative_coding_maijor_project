@@ -17,12 +17,9 @@ A creative coding interactive piece built with p5.js for the Creative Coding fin
 [Briefly describe what your project is about in 2-3 sentences.]
 
 ## Inspiration
+Our project draws inspiration from Wassily Kandinsky’s __Composition VIII (1923)__, a defining work of geometric abstract art that explores rhythm, emotion, and the relationship between colour and sound through circles, lines, and geometric forms. Kandinsky believed that painting could evoke feelings similarly to music, and this connection between visual art and sound became the core inspiration for our project.
 
-Our project is inspired by __Composition VIII (1923)__ by Wassily Kandinsky, a geometric abstract painting that explores the relationship between colour, shape, rhythm, and emotion. This piece is one of the defining works of geometric abstract art, evoking a visual sensation akin to musical rhythm through the interplay of circles, lines, triangles and colour. Kandinsky believed that painting, like music, can convey moods and emotions, and this ‘connection between sight and sound’ has become the core inspiration for our project.
-
-We aim to transform this originally static abstract painting into a dynamic, interactive digital artwork. Viewers will not only be able to observe the image but also influence the geometric elements within it through sound, mouse interactions and the passage of time, allowing the work to continuously change and evolve.
-
-Furthermore, we were inspired by Google Arts & Culture’s ‘Play a Kandinsky’ project, which reinterprets Kandinsky’s artistic language through sound and interaction. We also drew upon generative art and abstract motion graphics, aiming to create an interactive visual experience that combines musicality, rhythm and immersion.
+We aim to transform this static abstract painting into a dynamic interactive artwork where viewers can influence geometric elements through sound, mouse interaction, and time-based changes. We were also inspired by Google Arts & Culture’s Play a Kandinsky project, as well as generative art and abstract motion graphics, to create an immersive audiovisual experience that combines movement, rhythm, and interaction.
 
 - **[Inspiration 1]**: [Link or reference] — [How it influenced the visual style or interaction]
 - **[Inspiration 2]**: [Link or reference] — [What aspect you borrowed]
