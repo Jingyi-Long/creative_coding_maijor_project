@@ -40,6 +40,10 @@ The user will not directly interact with this mechanic, but instead experience t
 
 ![An image of sketch](Sketch.jpg)
 
+**References:**
+- Ancient Courses of Fictional Rivers, Robert Hodgin, 2022.
+https://www.artblocks.io/collection/ancient-courses-of-fictional-rivers-by-robert-hodgin
+
 ### Perlin Noise & Randomness — own by Zichen Feng
 The audio mechanic plays a music track and uses the p5.sound library's FFT analyser to split the sound into three frequency bands: low, mid, and high. Each band controls a different family of shapes from Composition VIII.
 Low frequencies (bass) drive the large black concentric circle in the upper-left corner, making it grow and pulse with the beat. Mid frequencies control the brightness of the yellow and violet discs, so they glow softly when the melody is active. High frequencies trigger quick flashes along the diagonal lines and sharpen the edges of the triangles when cymbals or other high sounds hit.
