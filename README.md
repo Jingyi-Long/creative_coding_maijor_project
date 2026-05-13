@@ -41,7 +41,7 @@ The user will not directly interact with this mechanic, but instead experience t
 ![An image of sketch](Sketch.jpg)
 
 **References:**
-- Ancient Courses of Fictional Rivers, Robert Hodgin, 2022.
+- *Ancient Courses of Fictional Rivers*, Robert Hodgin, 2022.
 https://www.artblocks.io/collection/ancient-courses-of-fictional-rivers-by-robert-hodgin
 
 ### Perlin Noise & Randomness — own by Zichen Feng
