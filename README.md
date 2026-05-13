@@ -42,7 +42,8 @@ The user will not directly interact with this mechanic, but instead experience t
 
 **References:**
 - *Ancient Courses of Fictional Rivers*, Robert Hodgin, 2022.
-https://www.artblocks.io/collection/ancient-courses-of-fictional-rivers-by-robert-hodgin
+
+    https://www.artblocks.io/collection/ancient-courses-of-fictional-rivers-by-robert-hodgin
 
 ### Perlin Noise & Randomness — own by Zichen Feng
 The audio mechanic plays a music track and uses the p5.sound library's FFT analyser to split the sound into three frequency bands: low, mid, and high. Each band controls a different family of shapes from Composition VIII.
