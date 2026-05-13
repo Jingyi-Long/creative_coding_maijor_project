@@ -9,7 +9,7 @@ A creative coding interactive piece built with p5.js for the Creative Coding fin
 |------|--------|----------|
 | [Member 1 Name] | [@username1](https://github.com/username1) | Audio |
 | [Member 2 Name] | [@username2](https://github.com/username2) | Time-based |
-| [Member 3 Name] | [@username3](https://github.com/username3) | Perlin noise & randomness |
+| [Zichen Feng] | [zfen0688@uni.sydney.edu.au](https://github.com/username3) | Perlin noise & randomness |
 | [Member 4 Name] | [@username4](https://github.com/username4) | User input |
 
 ## Project Overview
