@@ -46,7 +46,7 @@ This connects to our Part 1 vision because Kandinsky thought of Composition VIII
 
 ![An image of sketch](readmeImages/sketch.png)
 
-### User Input — owned by Xiaoyu Xia
+### User Input — own by Xiaoyu Xia
 
 The user input mechanic allows the audience to directly interact with the geometric composition through mouse movement and clicks, inspired by Google Arts & Culture's *Play a Kandinsky* project and Kandinsky's synesthesia colour theory.
 
