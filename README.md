@@ -30,6 +30,8 @@ Low frequencies (bass) drive the large black concentric circle in the upper-left
 The user does not need to do anything except press play. Once the track starts, the painting responds to the music in real time, so watching and listening happen together.
 This connects to our Part 1 vision because Kandinsky thought of Composition VIII as a kind of visual music. He believed shapes and colours could behave like sounds. Our mechanic brings that idea to life by letting real sound actually move the shapes he painted.
 
+![An image of sketch](readmeImages/sketch.png)
+
 ### Time-based — own by Member 2 Name
 [Description]
 
