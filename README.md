@@ -67,13 +67,13 @@ The four mechanics share the same Kandinsky canvas, each controlling a different
 
 ## References
 
-Google Arts & Culture and Centre Pompidou (2021) Play a Kandinsky. Available at: https://artsandculture.google.com/experiment/play-a-kandinsky/sgF5ivv105ukhA (Accessed: 14 May 2026).
+Google Arts & Culture and Centre Pompidou (2021) *Play a Kandinsky*. Available at: https://artsandculture.google.com/experiment/play-a-kandinsky/sgF5ivv105ukhA (Accessed: 14 May 2026).
 
-Hodgin, R. (2022) Ancient Courses of Fictional Rivers [Generative artwork]. Art Blocks. Available at: https://www.artblocks.io/collection/ancient-courses-of-fictional-rivers-by-robert-hodgin.
+Hodgin, R. (2022) *Ancient Courses of Fictional Rivers* [Generative artwork]. Art Blocks. Available at: https://www.artblocks.io/collection/ancient-courses-of-fictional-rivers-by-robert-hodgin.
 
-Kandinsky, W. (1923) Composition VIII [Oil on canvas, 140 × 201 cm]. Solomon R. Guggenheim Museum, New York. Available at: https://www.guggenheim.org/artwork/1924 
+Kandinsky, W. (1923) *Composition VIII* [Oil on canvas, 140 × 201 cm]. Solomon R. Guggenheim Museum, New York. Available at: https://www.guggenheim.org/artwork/1924.
 
-Kandinsky, W. (1979) Point and Line to Plane. Trans. H. Dearstyne and H. Rebay. New York: Dover Publications. (Original work published 1926).
+Kandinsky, W. (1979) *Point and Line to Plane*. Trans. H. Dearstyne and H. Rebay. New York: Dover Publications. (Original work published 1926).
 
 McCarthy, L. (2023) p5.sound library. p5.js. Available at: https://p5js.org/reference/#/libraries/p5.sound.
 
