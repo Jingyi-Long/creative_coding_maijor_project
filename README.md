@@ -79,3 +79,7 @@ McCarthy, L. (2023) p5.sound library. p5.js. Available at: https://p5js.org/refe
 
 p5.js (2024) p5.js Reference. Processing Foundation. Available at: https://p5js.org/reference/.
 
+## AI Usage Statement
+
+Generative AI tools were used in this project to assist with structuring, refining, and summarizing ideas for the README documentation. The AI was used to organize key concepts, improve clarity and readability of written descriptions, and ensure consistent formatting throughout the document. All core ideas, design decisions, and creative directions were defined by the author.
+
