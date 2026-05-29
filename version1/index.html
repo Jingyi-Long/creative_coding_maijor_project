@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Composition VIII · Living Canvas</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <style>
+    html, body {
+      margin: 0; padding: 0;
+      background: #1a1714;
+      overflow: hidden;
+      font-family: Georgia, 'Times New Roman', serif;
+      color: #e8e0d0;
+    }
+
+    /* 左下角:标题 + 按键说明 */
+    #hud {
+      position: fixed;
+      left: 22px; bottom: 20px;
+      font-size: 12.5px; line-height: 1.75;
+      letter-spacing: 0.3px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.85);
+      pointer-events: none;
+      z-index: 10;
+      max-width: 360px;
+    }
+    #hud .title {
+      font-size: 15px;
+      font-style: italic;
+      color: #f0c674;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+    #hud .sub {
+      color: #b8b0a0;
+      font-size: 11px;
+      margin-bottom: 10px;
+      font-style: italic;
+    }
+    #hud .key {
+      color: #8fb8c9;
+      display: inline-block;
+      min-width: 22px;
+      text-align: center;
+      padding: 0 4px;
+      border: 1px solid rgba(143, 184, 201, 0.4);
+      border-radius: 3px;
+      font-family: monospace;
+      font-size: 11px;
+      margin-right: 4px;
+    }
+
+    /* 右上角:当前模式 */
+    #mode-label {
+      position: fixed;
+      right: 24px; top: 22px;
+      color: #f0c674;
+      font-size: 15px;
+      font-style: italic;
+      letter-spacing: 1.2px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.85);
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* 右下角:实时状态(音频能量 + 时间阶段) */
+    #live-panel {
+      position: fixed;
+      right: 22px; bottom: 20px;
+      pointer-events: none;
+      z-index: 10;
+      text-align: right;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.85);
+    }
+    #phase {
+      color: #8fb8c9;
+      font-size: 12px;
+      font-style: italic;
+      letter-spacing: 0.8px;
+      margin-bottom: 8px;
+    }
+    #meter {
+      font-size: 10.5px;
+      font-family: monospace;
+      color: #c0b8a8;
+    }
+    #meter .row {
+      display: flex; align-items: center; justify-content: flex-end;
+      gap: 8px;
+      margin-bottom: 2px;
+    }
+    #meter .lab {
+      width: 40px; text-align: right;
+      color: #908878;
+    }
+    #meter .bar {
+      display: inline-block;
+      height: 6px;
+      background: linear-gradient(90deg, #f0b429, #c0392b);
+      border-radius: 1px;
+      transition: width 60ms linear;
+      min-width: 1px;
+    }
+
+    /* 顶部细标尺,提示在 80 BPM 节拍下走拍 */
+    #bpm-tag {
+      position: fixed;
+      left: 24px; top: 22px;
+      color: #908878;
+      font-size: 11px;
+      font-family: monospace;
+      letter-spacing: 1px;
+      pointer-events: none;
+      z-index: 10;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.85);
+    }
+  </style>
+</head>
+<body>
+  <div id="bpm-tag">BPM 100 · 4/4</div>
+  <div id="mode-label"></div>
+
+  <div id="live-panel">
+    <div id="phase">Phase · intro</div>
+    <div id="meter"></div>
+  </div>
+
+  <div id="hud">
+    <div class="title">Composition VIII · Living Canvas</div>
+    <div class="sub">After Kandinsky, 1923 · 4-mechanic interactive study</div>
+    <div><span class="key">0</span><span class="key">␣</span>All on (default)</div>
+    <div><span class="key">1</span>Audio · Jingyi</div>
+    <div><span class="key">2</span>Time · Yuming</div>
+    <div><span class="key">3</span>Noise · Zichen</div>
+    <div><span class="key">4</span>Input · Xiaoyu</div>
+    <div style="margin-top:8px;color:#908878;font-size:11px">Move your cursor near shapes for ripples, rotation, and bending</div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="shape.js"></script>
+  <script src="audio-mechanic.js"></script>
+  <script src="time-mechanic.js"></script>
+  <script src="noise-mechanic.js"></script>
+  <script src="input-mechanic.js"></script>
+  <script src="sketch.js"></script>
+</body>
+</html>
