@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Composition VIII · Canon in D</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="canvas" id="canvas">
+    <!-- 初始完整图层：保留原始 Composition VIII 作为背景来源 -->
+    <img class="main" id="main" src="composition.svg" alt="Composition VIII">
+
+    <!-- 局部粒子层：只让被乐器使用的背景元素炸开成粒子，其余背景继续保留 -->
+    <canvas id="particle-layer" aria-hidden="true"></canvas>
+
+    <!-- JavaScript 会把四个乐器 SVG 拆成很多独立元素，并在这里做“聚合成乐器”的动画 -->
+    <div id="fragment-layer" aria-hidden="true"></div>
+  </div>
+
+  <!-- HUD -->
+  <div id="hud-title">
+    <div class="title">Composition VIII · Canon in D</div>
+    <div class="sub">After Kandinsky · fragments gather into instruments</div>
+  </div>
+
+  <div id="hud-help">
+    <div>🖱 拖拽：元素聚合 / 松手：回到原图</div>
+    <div>⌨ 1·钢琴 &nbsp; 2·小提琴 &nbsp; 3·吉他 &nbsp; 4·八音盒</div>
+    <div>⌨ 5·全部聚合 &nbsp; 0·回到原图 &nbsp; L·锁定</div>
+  </div>
+
+  <div id="hud-status">
+    <div id="audio-progress">audio loading 0%</div>
+    <div id="lock-state"></div>
+  </div>
+
+  <div id="hud-groups">
+    <div class="grow" data-inst="piano">
+      <span class="dot">○</span> <span class="lab">🎹 Piano [1]</span>
+    </div>
+    <div class="grow" data-inst="violin">
+      <span class="dot">○</span> <span class="lab">🎻 Violin [2]</span>
+    </div>
+    <div class="grow" data-inst="guitar">
+      <span class="dot">○</span> <span class="lab">🎸 Guitar [3]</span>
+    </div>
+    <div class="grow" data-inst="musicbox">
+      <span class="dot">○</span> <span class="lab">🎵 MusicBox [4]</span>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
