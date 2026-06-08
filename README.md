@@ -60,15 +60,15 @@ The audio mechanic plays Pachelbel's *Canon in D* as **five aligned stems** (ful
 For the audio-reactive visuals, an `AnalyserNode` taps the master output and the live spectrum is split into **four frequency bands** (low → high) mapped to piano / guitar / violin / music box. Because *Canon in D* is gentle and its loudness barely changes, each band's energy is normalised against a slow-moving baseline and amplified by a sensitivity factor, so even small musical swells become visible. The resulting per-instrument level drives a **brightness / saturation / glow flicker** on that instrument, so each one visibly pulses with its own part of the music. This brings Kandinsky's idea — that shapes and colours can behave like sound — to life by letting the real audio move the forms on screen.
 
 ### Time-based — owned by Yuming Cong
-Our project was inspired by Wassily Kandinsky’s belief that **painting could function like music through rhythm, emotion, and composition.** In Composition VIII, geometric forms, lines, and colours are arranged with a strong sense of visual rhythm. In our group project, I am responsible for designing the time-based visual evolution of the system, using alpha blending to support continuous trajectory retention.
+Our project was inspired by Wassily Kandinsky's belief that **painting could function like music — through rhythm, emotion, and composition.** In Composition VIII, geometric forms, lines, and colours are arranged with a strong sense of visual rhythm. In our group project, I am responsible for designing the time-based visual evolution of the system, using layered alpha compositing across multiple canvas layers to create a continuous sense of depth and presence.
 
-This mechanic is structured through stages similar to musical progression: **introduction, build-up, climax, and resolution.**
-At the beginning, the composition remains minimal and balanced. Large concentric circles drift slowly and expand gently, while diagonal lines move with subtle oscillation. Trails are short-lived and quickly fade, maintaining a clear and spacious composition.
-As the visual rhythm develops, circles pulse more frequently, lines overlap and shift direction, and triangles rotate faster to increase visual tension. Movement becomes more active, and trails last longer, gradually building visual density through overlapping paths. Additional geometric forms and particles also begin to appear, creating more layered and complex movement.
-During the climax stage, motion and interaction reach their highest intensity. Trails persist and accumulate, forming a dense layered “memory” of movement, while colour contrast becomes stronger and the overall composition becomes more dynamic.
-Finally, in the resolution stage, movement gradually slows and trails begin to fade again, returning the composition to a calmer and more balanced state.
+This mechanic is structured through stages analogous to musical progression: **introduction, build-up, climax, and resolution.**
 
-The user will not directly interact with this mechanic, but instead experience the artwork continuously evolving over time.
+At the beginning, the composition remains minimal and balanced. Geometric outlines emerge one by one across the canvas — sparse, weightless, and without colour — establishing a clear and spacious visual foundation. During the build-up, colour gradually fills each shape while saturation steadily rises, transforming the skeletal composition into a richly hued arrangement. Visual density increases as overlapping forms accumulate and the palette deepens toward full intensity.
+
+During the climax, motion and layering reach their highest intensity. Shapes oscillate in scale with individual rhythms, creating a pulsing, breathing quality across the composition. New geometric elements — curved lines, straight lines, circles, and rotating triangles — emerge and animate with small-amplitude oscillation, while radial bloom gradients expand outward from selected shapes, building a luminous and layered visual field. Colour contrast is at its strongest and the overall composition is most dynamic. Finally, in the resolution stage, bloom and fill colour fade first, dissolving the richness of the scene, followed by the gradual disappearance of all outlines, returning the composition to silence and stillness before the cycle begins again.
+
+The user does not directly interact with this mechanic, but instead experiences the artwork continuously evolving over time.
 
 ![An image of sketch](readmeImages/Sketch.jpg)
 
@@ -107,3 +107,4 @@ The four mechanics share the same Kandinsky canvas, each controlling a different
 ## AI Usage Statement
 We used Claude (Anthropic) to assist with parts of the code.
 
+Yuming Cong used ChatGPT to generate the image of the sketch.
