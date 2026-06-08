@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Composition VIII · Canon in D</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="canvas" id="canvas">
+    <!-- Base artwork layer: keeps the original Composition VIII as the visual source. -->
+    <img class="main" id="main" src="composition.svg" alt="Composition VIII">
+
+    <!-- Particle layer: selected background elements dissolve into local particle bursts. -->
+    <canvas id="particle-layer" aria-hidden="true"></canvas>
+
+    <!-- Instrument fragment layer: JavaScript splits SVG instruments into animated pieces. -->
+    <div id="fragment-layer" aria-hidden="true"></div>
+  </div>
+
+  <!-- HUD -->
+  <div id="hud-title">
+    <div class="title">Composition VIII · Canon in D</div>
+    <div class="sub">After Kandinsky · fragments gather into instruments</div>
+  </div>
+
+  <div id="hud-help">
+    <div>🖱 Drag: gather fragments / Release: return to the original image</div>
+    <div>🖱 Click: emit a ripple ring from the pointer</div>
+    <div>⌨ 1·Piano &nbsp; 2·Violin &nbsp; 3·Guitar &nbsp; 4·MusicBox</div>
+    <div>⌨ 5·Gather all &nbsp; 0·Reset &nbsp; L·Lock</div>
+  </div>
+
+  <div id="hud-status">
+    <div id="audio-progress">audio loading 0%</div>
+    <div id="lock-state"></div>
+  </div>
+
+  <div id="hud-groups">
+    <div class="grow" data-inst="piano">
+      <span class="dot">○</span> <span class="lab">🎹 Piano [1]</span>
+    </div>
+    <div class="grow" data-inst="violin">
+      <span class="dot">○</span> <span class="lab">🎻 Violin [2]</span>
+    </div>
+    <div class="grow" data-inst="guitar">
+      <span class="dot">○</span> <span class="lab">🎸 Guitar [3]</span>
+    </div>
+    <div class="grow" data-inst="musicbox">
+      <span class="dot">○</span> <span class="lab">🎵 MusicBox [4]</span>
+    </div>
+  </div>
+  <!-- Loading order matters: mechanics are loaded before main.js because main.js starts the render loop. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <script src="perlin-noise.js"></script>      <!-- Mechanic: Perlin noise + seeded randomness -->
+  <script src="mechanic-audio.js"></script>    <!-- Mechanic: Audio -->
+  <script src="mechanic-time.js"></script>     <!-- Mechanic: Time-based atmosphere -->
+  <script src="input-mechanic.js"></script>    <!-- Mechanic: User input -->
+  <script src="main.js"></script>              <!-- Assembly and render loop; must load before mouse-ripple.js -->
+  <script src="mouse-ripple.js"></script>      <!-- Mechanic: Mouse proximity and click ripple reactions; must load last -->
+</body>
+</html>
