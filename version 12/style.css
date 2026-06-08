@@ -1,0 +1,195 @@
+/* style.css */
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html, body {
+  width: 100vw;
+  height: 100vh;
+  background: #f3eadb;
+  overflow: hidden;
+  font-family: Georgia, 'Times New Roman', serif;
+  color: #2b2622;
+  user-select: none;
+  cursor: pointer;
+}
+
+/* 主画布 */
+.canvas {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* 初始完整 Composition VIII 图层 */
+.main {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(92vw, 92vh * 1800 / 1260);
+  height: auto;
+  pointer-events: none;
+  will-change: opacity, filter;
+  transition: opacity 0.35s ease, filter 0.35s ease;
+  z-index: 1;
+}
+
+/* 背景粒子层：放在原图上方、乐器下方，避免抢主体 */
+#particle-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 1;
+}
+
+/* 所有“拆开的 SVG 元素”都放在这个层里 */
+#fragment-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* 每个乐器的最终聚合容器 */
+.instrument-wrap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 32vw;
+  max-height: 42vh;
+  transform-origin: center center;
+  opacity: 0;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  pointer-events: none;
+  mix-blend-mode: normal;
+}
+
+.instrument-wrap svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 42vh;
+  overflow: visible;
+}
+
+.instrument-wrap[data-inst="piano"]    { width: 36vw; }
+.instrument-wrap[data-inst="violin"]   { width: 31vw; }
+.instrument-wrap[data-inst="guitar"]   { width: 27vw; }
+.instrument-wrap[data-inst="musicbox"] { width: 31vw; }
+
+.svg-piece {
+  will-change: transform, opacity;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* HUD */
+#hud-title {
+  position: fixed;
+  left: 24px; top: 22px;
+  z-index: 10;
+  pointer-events: none;
+  text-shadow: 0 1px 2px rgba(255,255,255,0.6);
+}
+#hud-title .title {
+  font-size: 15px;
+  font-style: italic;
+  color: #2b2622;
+  letter-spacing: 0.5px;
+}
+#hud-title .sub {
+  font-size: 11px;
+  color: #6a6055;
+  font-style: italic;
+  margin-top: 4px;
+}
+
+#hud-help {
+  position: fixed;
+  left: 24px; bottom: 22px;
+  z-index: 10;
+  pointer-events: none;
+  font-size: 11px;
+  line-height: 1.8;
+  color: #5a554e;
+  text-shadow: 0 1px 2px rgba(255,255,255,0.6);
+}
+
+#hud-status {
+  position: fixed;
+  right: 24px; top: 22px;
+  z-index: 10;
+  pointer-events: none;
+  text-align: right;
+  font-family: monospace;
+  font-size: 11px;
+  color: #5a554e;
+  text-shadow: 0 1px 2px rgba(255,255,255,0.6);
+}
+#audio-progress { color: #6a6055; }
+#lock-state {
+  margin-top: 4px;
+  color: #c8941b;
+  font-style: italic;
+}
+
+#hud-groups {
+  position: fixed;
+  right: 24px; bottom: 22px;
+  z-index: 10;
+  pointer-events: none;
+  text-align: right;
+  text-shadow: 0 1px 2px rgba(255,255,255,0.6);
+}
+#hud-groups .grow {
+  font-size: 12px;
+  margin-bottom: 4px;
+  font-family: monospace;
+  color: #908878;
+  transition: color 0.2s, font-weight 0.2s;
+}
+#hud-groups .grow.active {
+  color: #2b2622;
+  font-weight: 600;
+}
+#hud-groups .grow .dot {
+  display: inline-block;
+  width: 10px;
+}
+#hud-groups .grow[data-inst="piano"].active    { color: #5a8a3a; }
+#hud-groups .grow[data-inst="violin"].active   { color: #2c5f8a; }
+#hud-groups .grow[data-inst="guitar"].active   { color: #bd8f35; }
+#hud-groups .grow[data-inst="musicbox"].active { color: #7b4f8d; }
+
+
+/* Inline SVG background: used so individual original elements can disappear */
+.composition-bg-svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(92vw, 92vh * 1800 / 1260);
+  height: auto;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  will-change: opacity, filter;
+  transition: opacity 0.25s ease, filter 0.25s ease;
+  z-index: 1;
+  overflow: visible;
+}
+
+
+/* Perlin breathing glow layer: above background/particles, below instruments */
+#glow-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 1;
+}
