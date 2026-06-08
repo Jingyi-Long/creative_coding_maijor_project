@@ -1,9 +1,14 @@
 # IDEA9103 Major Project 
 
-## Part 1: Project Direction
-Our project draws inspiration from Wassily Kandinsky’s __Composition VIII (1923)__, a defining work of geometric abstract art that explores rhythm, emotion, and the relationship between colour and sound through circles, lines, and geometric forms. Kandinsky believed that painting could evoke feelings similarly to music, and this connection between visual art and sound became the core inspiration for our project.
+## Part 1: Project Overview
+An interactive audiovisual reinterpretation of Wassily Kandinsky's Composition VIII (1923), built with p5.js. The static painting is rebuilt from SVG geometry and then brought to life: over a timed sequence the shapes draw themselves in and gain colour, the viewer can gather the composition into four musical instruments, and the whole scene reacts in real time to a synchronised recording of Pachelbel's Canon in D. Four mechanics — Audio, Time-based, Perlin noise & randomness, and User input — each drive a different layer of the same canvas.
 
-We aim to transform this static abstract painting into a dynamic interactive artwork where viewers can influence geometric elements through sound, mouse interaction, and time-based changes. We were also inspired by Google Arts & Culture’s Play a Kandinsky project, as well as generative art and abstract motion graphics, to create an immersive audiovisual experience that combines movement, rhythm, and interaction.
+## Inspiration
+ 
+Our project draws inspiration from Wassily Kandinsky's **Composition VIII (1923)**, a defining work of geometric abstract art that explores rhythm, emotion, and the relationship between colour and sound through circles, lines, and geometric forms. Kandinsky believed that painting could evoke feelings in the same way as music, and this connection between visual art and sound became the core idea of our project.
+ 
+We transform this static abstract painting into a dynamic interactive artwork where viewers can influence the geometric elements through sound, mouse interaction, and time-based change. We were also inspired by Google Arts & Culture's *Play a Kandinsky* project, as well as generative art and abstract motion graphics, to create an immersive audiovisual experience that combines movement, rhythm, and interaction.
+ 
 
 ![An image of Composition VIII](readmeImages/image.png)
 *Wassily Kandinsky, Composition VIII, 1923, oil on canvas, 140 × 201 cm. Solomon R. Guggenheim Museum, New York.*
@@ -13,7 +18,33 @@ We aim to transform this static abstract painting into a dynamic interactive art
 
 ---
 
-## Part 2: Mechanics
+## How to Run & Interaction Instructions
+ 
+1. Open the final project folder (`version 10/…`) in VS Code and run **`index.html` with Live Server**. The project loads local audio and SVG files, so it must be **served** (Live Server / a local server), not opened directly as a file.
+2. **Click anywhere on the page once.** Browsers block audio until a user gesture, so this first click starts the synchronised soundtrack and the timed intro.
+3. **Watch the intro:** the painting's shapes first appear as outlines, then fill with colour as the saturation gradually rises.
+4. **Interact:**
+   - **Drag the mouse** to gather the shapes into the instruments; **release** to let them return.
+   - Press **1 / 2 / 3 / 4** to summon Piano / Violin / Guitar / Music box individually.
+   - Press **5** to gather all instruments, **0** to return to the painting.
+   - Press **L** or **Space** to lock / unlock the current state.
+5. The time-based sequence runs on a roughly **98-second loop** and then resets automatically.
+The piece is responsive — it re-scales when the browser window is resized.
+
+
+---
+
+## Techniques
+ 
+- **p5.js core:** `noise()`, `noiseSeed()`, seeded randomness, `map()`, `frameCount`, and responsive `windowResized()` / `resizeCanvas()`.
+- **Layered rendering:** the original painting (SVG/DOM), a particle canvas, and a glow canvas are stacked so each mechanic owns its own visual layer and does not overwrite the others.
+- **Modular structure:** each mechanic lives in its own file and `main.js` brings them together; the mechanic files read/write a small set of shared state (assembly amount, published audio levels, time-reveal values) instead of touching each other directly.
+- **Web Audio API (beyond the course):** the five instrument stems are played on a single shared `AudioContext` clock so they stay sample-accurately in sync, and an `AnalyserNode` reads the live frequency spectrum to drive the visuals. The Week 12 tutorial covered `p5.sound`'s `p5.FFT` / `p5.Amplitude`; we used the lower-level Web Audio API instead because `p5.sound`'s `loadSound().loop()` cannot guarantee sample-accurate multi-track synchronisation (see References).
+- **Key visual decision:** rather than fading a whole instrument image in as one layer, each instrument SVG is split into many pieces in JavaScript that gather into the final shape, giving a more deliberate "assembling" motion.
+
+---
+
+## Mechanics
 ### Team Members
 
 | Name | uid | Mechanic |
@@ -24,8 +55,9 @@ We aim to transform this static abstract painting into a dynamic interactive art
 | Xiaoyu Xia | [xxia0518](https://github.com/xxia0518) | User input |
 
 ### Audio — owned by Jingyi Long
-The audio mechanic uses the p5.sound FFT analyser to break an audio track into three frequency ranges: low, mid, and high. Each range controls a different group of shapes from the painting. Low frequencies drive the large black concentric circle in the upper left, making it expand and pulse like a bass note. Mid frequencies adjust the brightness of the yellow and violet discs, so the warm colours respond to melody. High frequencies trigger short flashes along the diagonal lines and sharpen the triangles, matching sudden notes or percussion. The user experiences the piece by pressing a key to start the audio, then watching the canvas react in real time. 
-![audio mechanics image](readmeImages/AudioMechanicImages.png)
+The audio mechanic plays Pachelbel's *Canon in D* as **five aligned stems** (full ensemble + piano, violin, guitar, music box). All five are loaded through the Web Audio API and started at the same `AudioContext` time, so they behave like stems on one shared timeline and never drift apart. The mix is dynamic: when no instrument is gathered, the ensemble plays as background; as instruments form, the ensemble ducks down and each instrument's own stem fades up.
+ 
+For the audio-reactive visuals, an `AnalyserNode` taps the master output and the live spectrum is split into **four frequency bands** (low → high) mapped to piano / guitar / violin / music box. Because *Canon in D* is gentle and its loudness barely changes, each band's energy is normalised against a slow-moving baseline and amplified by a sensitivity factor, so even small musical swells become visible. The resulting per-instrument level drives a **brightness / saturation / glow flicker** on that instrument, so each one visibly pulses with its own part of the music. This brings Kandinsky's idea — that shapes and colours can behave like sound — to life by letting the real audio move the forms on screen.
 
 ### Time-based — owned by Yuming Cong
 Our project was inspired by Wassily Kandinsky’s belief that **painting could function like music through rhythm, emotion, and composition.** In Composition VIII, geometric forms, lines, and colours are arranged with a strong sense of visual rhythm. In our group project, I am responsible for designing the time-based visual evolution of the system, using alpha blending to support continuous trajectory retention.
@@ -65,21 +97,13 @@ This mechanic is the only one that requires active participation from the viewer
 ## Part 3: Putting It Together 
 The four mechanics share the same Kandinsky canvas, each controlling a different layer rather than a separate region. Time-based motion sets the underlying rhythm, Perlin noise adds organic variation to positions and colours, audio reshapes the forms through three frequency bands, and user input lets the viewer disturb nearby elements. They influence each other through shared geometric objects, so a single circle can pulse to the bass, drift over time, and still react to the mouse. What holds the piece together is Kandinsky's own logic: one colour palette, the original geometric vocabulary, and his idea of painting as visual music.
 
-## References
-
-Google Arts & Culture and Centre Pompidou (2021) *Play a Kandinsky*. Available at: https://artsandculture.google.com/experiment/play-a-kandinsky/sgF5ivv105ukhA (Accessed: 14 May 2026).
-
-Hodgin, R. (2022) *Ancient Courses of Fictional Rivers* [Generative artwork]. Art Blocks. Available at: https://www.artblocks.io/collection/ancient-courses-of-fictional-rivers-by-robert-hodgin.
-
-Kandinsky, W. (1923) *Composition VIII* [Oil on canvas, 140 × 201 cm]. Solomon R. Guggenheim Museum, New York. Available at: https://www.guggenheim.org/artwork/1924.
-
-Kandinsky, W. (1979) *Point and Line to Plane*. Trans. H. Dearstyne and H. Rebay. New York: Dover Publications. (Original work published 1926).
-
-McCarthy, L. (2023) p5.sound library. p5.js. Available at: https://p5js.org/reference/#/libraries/p5.sound.
-
-p5.js (2024) p5.js Reference. Processing Foundation. Available at: https://p5js.org/reference/.
+## External References
+ 
+- **MDN Web Audio API** — `AudioContext`, `AudioBufferSourceNode`, `AnalyserNode`, `GainNode`: <https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API> — used for the synchronised multi-stem playback and the live spectrum analysis, which go beyond the `p5.sound` material taught in class.
+- **p5.js `p5.FFT` / `p5.Amplitude`** (Week 12 tutorial) — the audio-reactive concept (frequency bands driving visuals) follows this tutorial; we reproduced it with the lower-level Web Audio API.
+- **Google Arts & Culture & Centre Pompidou, *Play a Kandinsky*, 2021** — <https://artsandculture.google.com/experiment/play-a-kandinsky/sgF5ivv105ukhA>
+- **Robert Hodgin, *Ancient Courses of Fictional Rivers*, 2022** — <https://www.artblocks.io/collection/ancient-courses-of-fictional-rivers-by-robert-hodgin> (trail / accumulation inspiration for the time-based mechanic).
 
 ## AI Usage Statement
-
-Generative AI tools were used in this project to assist with structuring, refining, and summarizing ideas for the README documentation. The AI was used to organize key concepts, improve clarity and readability of written descriptions, and ensure consistent formatting throughout the document. All core ideas, design decisions, and creative directions were defined by the author.
+We used Claude (Anthropic) to assist with parts of the code.
 
