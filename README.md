@@ -140,3 +140,5 @@ We used Claude (Anthropic) to assist with parts of the code.
 Yuming Cong used ChatGPT to generate the image of the sketch.
 
 Zichen Feng used ChatGPT to support idea development, code troubleshooting, and wording refinement.
+
+Xiaoyu Xia used Gemini, Cursor + Codex, and Claude (Anthropic) iteratively throughout the development of the User Input mechanic to refine creative ideas, brainstorm design directions, and continuously improve the implementation. All final design decisions, Figma asset creation, and conceptual framing were made by the author.
