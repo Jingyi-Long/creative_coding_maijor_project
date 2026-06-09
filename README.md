@@ -110,8 +110,28 @@ To realise this idea, **I personally designed all the instrument assets in Figma
 When the cursor moves across the canvas, nearby shapes react with distinct behaviours: **circles** breathe and emit glowing ripple rings, **lines** (converted to quadratic Béziers) bend perpendicular to themselves toward the cursor, **triangles** spin faster and warm toward orange, and **rectangles** tilt toward or away from the pointer (Snibbe & Levin, 2001). A custom spring-damper function ensures every shape settles smoothly back to its original layout once the cursor leaves. The mapping also follows Kandinsky's colour–sound synesthesia: yellow regions react energetically (his "trumpet"), blue regions slowly and softly (his "organ"), and red regions in between.
  
 **Clicking anywhere on the canvas** turns the painting into a playable instrument (Cytowic, 2002): a circular ripple wave expands from the click point, momentarily amplifying every shape it passes through, while a short pitched note is synthesised via the Web Audio API — the X-position maps to a C-major pentatonic scale, the Y-position controls the octave. Combined with the keyboard toggles and drag-controlled assembly strength already described in the project's Interaction Instructions, this gives the audience a strong sense of literally "playing" Kandinsky's composition. Accessibility settings are respected throughout: motion-heavy reactions are disabled for users with `prefers-reduced-motion` enabled.
- 
 
+- **User Input — in-class techniques:** p5.js mouse and keyboard event
+  handling (`mouseX` / `mouseY`, `mousePressed()`, `keyPressed()`) from
+  Week 5; `dist()` for proximity checks (Week 8); `map()` and
+  `constrain()` for value scaling (Week 5, Week 11); `noise()` as a
+  reference for organic oscillation (Week 11); `push()` / `pop()` for
+  transformation state isolation (Week 10); and `windowResized()` /
+  `resizeCanvas()` for responsive layout (Week 9).
+
+- **User Input — beyond the course:** A custom spring-damper physics
+  system (`springTo()`) with per-axis velocity states; runtime quadratic
+  Bézier path generation converting SVG line elements into bendable
+  curves; raw Web Audio API `OscillatorNode` synthesis mapping canvas
+  X-position to a C-major pentatonic scale and Y-position to octave
+  (Week 12 covered `p5.sound` / `p5.FFT` — this mechanic uses the
+  lower-level Web Audio API instead for direct note synthesis); CSS
+  `prefers-reduced-motion` for accessibility; and a decoupled
+  `window.mouseInfluence` publish-subscribe API allowing other modules
+  to read cursor data without coupling to this file. Gemini,
+  Cursor + Codex, and Claude (Anthropic) were used iteratively to
+  develop and refine these beyond-course elements.
+ 
 
 ## Part 3: Putting It Together 
 The four mechanics share the same Kandinsky canvas, each controlling a different layer rather than a separate region. Time-based motion sets the underlying rhythm, Perlin noise adds organic variation to positions and colours, audio reshapes the forms through three frequency bands, and user input lets the viewer disturb nearby elements. They influence each other through shared geometric objects, so a single circle can pulse to the bass, drift over time, and still react to the mouse. What holds the piece together is Kandinsky's own logic: one colour palette, the original geometric vocabulary, and his idea of painting as visual music.
