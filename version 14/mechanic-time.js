@@ -1,13 +1,56 @@
-// mechanic-time.js — version 8 timeline v11
+// mechanic-time.js — 【Mechanic: Time-based】
+// Creative director: Yuming Cong
 //
-// Full timeline (timer starts on click, auto-loops at 98s):
-//  0  – 12s  : All shapes appear as outlines/sketches, no fill
-//  12 – 47s  : Colour fill + saturation gradually rises, reaches 100% at 47s
-//  47 – 71s  : Shapes oscillate in scale + bloom lightly oscillates (smaller range)
-//  72 – 80s  : Shapes scale back down
-//  80 – 97s  : All shapes + bloom fade out together
-//  97s       : Canvas is blank
-//  98s       : Full loop reset, starts over
+// AI Usage Declaration:
+// Claude (Anthropic) was used to assist with parts of this module, including
+// help with smoothstep easing logic, bloom fade timing, and optimisation of
+// the decoration canvas layer. All design decisions, timeline structure,
+// conceptual framing, and final implementation choices were made by the author.
+//
+// This file controls the global animation timeline. A pointerdown click starts
+// a 98 s clock; requestAnimationFrame drives a tick() loop that updates every
+// SVG shape and canvas layer each frame, then auto-resets at 98 s.
+//
+// Timeline:
+//   0  – 12 s  : shapes appear as outlines, no fill
+//   12 – 47 s  : colour fill + saturation rise to full Kandinsky palette
+//   47 – 71 s  : shapes oscillate in scale; bloom pulses on canvas
+//   70 – 80 s  : shapes scale back down
+//   80 – 97 s  : fill and outlines fade out in two stages
+//   98 s       : full loop reset, starts over
+//
+// Exposes window.__timeFade / __timeSat / __globalFade for main.js to read.
+//
+//   Cross-file dependencies (provided at runtime):
+//     backgroundSvg, usedBackgroundElements  ← main.js
+//     getMainArtRect()                        ← main.js (used to position bloom)
+//     #particle-layer DOM element             ← used as insertion anchor for deco-layer
+//
+// Course concepts used:
+// - addEventListener(): pointerdown starts the clock; resize keeps canvas fitted
+// - createElementNS() + setAttribute(): 28 new SVG shapes (circles, lines, paths,
+//     triangles) are built and appended at runtime during the oscillation phase
+// - For loops + object arrays: shapeItems[], newShapeItems[], and bloomItems[]
+//     are iterated every frame to apply opacity, scale, and colour updates
+// - Easing: ss() implements the cubic smoothstep curve for all fade transitions
+//
+// How it is used in this project:
+// - Sequences the full sketch-reveal → colour-fill → oscillation → fade-out
+//     lifecycle across the 98 s loop
+// - Sets window.__globalFade each frame so main.js can dim instrument shapes
+//     in sync with the background fade-out
+//
+// Beyond class:
+// - performance.now() is used instead of frameCount for frame-rate-independent
+//     timing — the clock stays accurate even during dropped frames
+// - Two Canvas 2D layers (deco-layer, bloom-layer) are created and z-stacked
+//     above the SVG at runtime, which goes beyond the single canvas from class
+// - sr() is a seeded pseudo-random function (Math.sin hash) that produces
+//     deterministic per-shape variation without any external library
+// - hexToRgba() parses hex colours and injects live alpha, enabling per-shape
+//     saturation animation beyond the basic RGB/hex work covered in class
+// - The bloom effect composites three layered radial gradients per shape onto
+//     Canvas 2D each frame, extending arcs-and-paths into a live glow technique
 
 (function () {
   let clickTime = null;
@@ -18,8 +61,8 @@
   const SCALE_DOWN_BASE  = 70;
   const BLOOM_FADE_START  = 80;   // bloom fades out with fill colour (80-88s)
   const BLOOM_FADE_END    = 88;
-  const SHAPE_FADE_START  = 80;   // kept for main.js compatibility
-  const SHAPE_FADE_DUR    = 17;
+  const SHAPE_FADE_START  = 80;   // unused; retained as readable reference for the two-phase fade start
+  const SHAPE_FADE_DUR    = 17;   // unused; total fade window (80–97 s)
   const LOOP_AT           = 98;   // loop resets at 98s
 
   let newShapesInited = false;
@@ -151,7 +194,7 @@
     }
   }
 
-  // ── Initialise new shapes & bloom (triggered at 48s) ─────
+  // ── Initialise new shapes & bloom (triggered at 47s) ─────
   function initNewShapes() {
     if (newShapesInited || !backgroundSvg) return;
     newShapesInited = true;
@@ -251,7 +294,7 @@
       });
     }
 
-    // Pick 5 filled shapes for bloom
+    // Pick 4 filled shapes for bloom (random 4, drop top-left, add bottom-right)
     const pool = shapeItems.filter(x => {
       const f = x.el.getAttribute('fill');
       return f && f !== 'none' && !f.startsWith('url(') && f !== '#f3eadb';
@@ -277,7 +320,7 @@
     }
     if (topLeftItem) picked.delete(topLeftItem);
 
-    // Force-add the bottom-right shape (largest x+y) as the 5th bloom source
+    // Force-add the bottom-right shape (largest x+y) as the 4th bloom source
     let brItem = null, brVal = -Infinity;
     for (const item of pool) {
       if (picked.has(item)) continue;
@@ -305,7 +348,7 @@
     }
   }
 
-  // ── Bloom drawing (shrinks and fades 72-84s, disappears before shapes) ──
+  // ── Bloom drawing (fades out 80-88s, disappears before outlines) ──
   function drawBloom(t) {
     if (!bloomCtx || !bloomItems.length) return;
     if (typeof getMainArtRect !== 'function') return;
