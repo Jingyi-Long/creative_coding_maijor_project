@@ -155,10 +155,27 @@ The four mechanics share the same Kandinsky canvas, each controlling a different
 - **Snibbe, S. S., & Levin, G.** (2001). Interactive dynamic abstraction. *Proceedings of the 14th Annual ACM Symposium on User Interface Software and Technology*, 21–30. https://doi.org/10.1145/502348.502353
  
 ## AI Usage Statement
-We used Claude (Anthropic) to assist with parts of the code.
 
-Yuming Cong used ChatGPT to generate the image of the sketch.
+In line with the unit's generative-AI policy, we disclose the AI assistance used in
+this project. Tools used across the team: **Claude (Anthropic)**, **Gemini**, and
+**Cursor + Codex**. All AI-assisted code is also marked with comments at the relevant
+places in the source.
 
-Zichen Feng used ChatGPT to support idea development, code troubleshooting, and wording refinement.
+**Jingyi Long (Audio):** Claude helped with the modular file split, the audio-reactive
+analysis in `mechanic-audio.js`, and the flicker compositing in `main.js`. How it works:
+an `AnalyserNode` reads the live spectrum each frame, splits it into four instrument
+bands, normalises each against a slow baseline, and publishes a 0–1 value on
+`window.audioBands` that drives each instrument's brightness/saturation flicker. The
+synchronised audio playback and the other mechanics are our own work.
 
-Xiaoyu Xia used Gemini, Cursor + Codex, and Claude (Anthropic) iteratively throughout the development of the User Input mechanic to refine creative ideas, brainstorm design directions, and continuously improve the implementation. All final design decisions, Figma asset creation, and conceptual framing were made by the author.
+**Xiaoyu Xia (User input):** Gemini, Cursor + Codex, and Claude were used iteratively to
+refine ideas, brainstorm creative directions, and improve the implementation in
+`input-mechanic.js`; all final design decisions and asset creation were the author's.
+How it works: keyboard / drag / scroll / pointer input is captured and published as
+`groupPinned`, `dragAssemble`, and a `window.mouseInfluence` field; a spring-damper
+system then animates the background shapes on proximity, and clicks emit a ripple wave
+plus a short pentatonic note.
+
+**Yuming Cong (Time-based):** used ChatGPT to generate the image of the sketch.
+
+**Zichen Feng (Perlin & randomness):** used ChatGPT to support idea development, code troubleshooting, and wording refinement.
