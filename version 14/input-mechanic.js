@@ -1,6 +1,14 @@
 // mechanic-userinput.js — 【Mechanic: User input】
 // Creative director: Xiaoyu Xia
+// * User Input Mechanic — IDEA9103 Major Project
+// Author: Xiaoyu Xia (xxia0518)
 //
+// AI Usage Declaration:
+// Claude (Anthropic) was used to assist with parts of this module, including
+// help with debugging the spring-damper physics, refining the mouseInfluence
+// API design, and code optimisation suggestions. All design decisions,
+// conceptual framing, Figma asset creation, and final implementation choices
+// were made by the author.
 // This file owns all user input and every visual reaction it triggers.
 // Structured in two parts:
 //
