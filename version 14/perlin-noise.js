@@ -1,15 +1,26 @@
 // perlin-noise.js
-// Week 11 Perlin noise file
-// This file is separated from main.js so the Perlin noise mechanic is clear.
+// Week 11 Perlin noise mechanic — owned by Zichen Feng
 //
 // Course concepts used:
-// - noise()
-// - map()
-// - frameCount
+// - noise(): creates smooth, continuous random values
+// - map(): remaps noise values into movement / size / opacity ranges
+// - frameCount: works as the time input for changing noise values
+// - noiseSeed(): keeps the Perlin noise behaviour consistent each time
 //
-// Small implementation fix:
-// - This file also includes safe fallback values so the main animation does not stop
-//   if p5.js is still loading or the CDN is blocked.
+// How it is used in this project:
+// - controls the smooth floating movement of formed instruments
+// - controls the drifting motion and size variation of circular particles
+// - controls the subtle breathing glow around each instrument
+//
+// Beyond class tutorial / implementation additions:
+// - This file is separated from main.js to make the Perlin noise mechanic clearer.
+// - smoothPerlin() is an extra smoothing helper. It stores previous values to reduce jitter and make floating movement softer.
+// - Safe fallback values are added so the animation will not stop if p5.js is still loading or the CDN is blocked.
+// - The project applies p5.js noise() to SVG, canvas particles, and glow layers, which goes beyond the basic p5.js canvas examples from class.
+//
+// Important:
+// The core Perlin noise mechanic still comes from p5.js noise(), map(), frameCount, and noiseSeed().
+
 
 function setup() {
   // The project already uses SVG / HTML / Canvas layers.
