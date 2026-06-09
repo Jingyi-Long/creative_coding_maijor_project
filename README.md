@@ -144,7 +144,7 @@ The four mechanics share the same Kandinsky canvas, each controlling a different
 - **p5.js noiseSeed()**— https://p5js.org/reference/p5/noiseSeed/ — used to keep the Perlin noise movement stable and repeatable across runs.
 - **Google Arts & Culture & Centre Pompidou, *Play a Kandinsky*, 2021** — <https://artsandculture.google.com/experiment/play-a-kandinsky/sgF5ivv105ukhA>
 - **Robert Hodgin, *Ancient Courses of Fictional Rivers*, 2022** — <https://www.artblocks.io/collection/ancient-courses-of-fictional-rivers-by-robert-hodgin> (trail / accumulation inspiration for the time-based mechanic).
-- **Robert Hodgin, Ancient Courses of Fictional Rivers, 2022**, Art Blocks — https://www.artblocks.io/collection/ancient-courses-of-fictional-rivers-by-robert-hodgin — used as inspiration for generative visual movement, layered particle aesthetics, and time-based accumulation.
+
 
 ## Academic References
 
@@ -178,4 +178,5 @@ plus a short pentatonic note.
 
 **Yuming Cong (Time-based):** used ChatGPT to generate the image of the sketch.
 
-**Zichen Feng (Perlin & randomness):** used ChatGPT to support idea development, code troubleshooting, and wording refinement.
+**Zichen Feng (Perlin & randomness):** uZichen Feng used ChatGPT to support idea development, code troubleshooting, and wording refinement for the Perlin noise mechanic. ChatGPT was used to explore how p5.js noise(), map(), frameCount, and noiseSeed() could be applied to create smooth instrument floating, layered circular particle movement, and a subtle breathing glow effect. ChatGPT also helped debug parts of the JavaScript structure, including separating the Perlin noise logic into perlin-noise.js and improving the interaction between the Perlin noise mechanic, SVG elements, particle canvas, and audio mechanic.
+The generated code works by using p5.js noise() to produce smooth continuous values over time. These values are mapped into visual ranges such as movement distance, particle drift, particle size, and glow opacity. Random numbers are used mainly to initialise particle position, size, opacity, and distribution, while Perlin noise controls the smoother ongoing motion. The final interaction logic, visual direction, testing, code adjustments, and submitted implementation were reviewed and completed by the student.
