@@ -1,49 +1,53 @@
 // input-mechanic.js — 【Mechanic: User input】
-// 负责人(creative director):  ______
+// Creative director:  Xiaoyu Xia
 //
-// 把用户输入翻译成画面与音乐的控制信号。设计上分三个层次:
+// Translates user input into control signals for the visuals and music.
+// Designed in three layers:
 //
 //   ┌────────────────────┬────────────────────────────┬──────────────────────────┐
-//   │ 输入通道           │ 性质                       │ 输出                     │
+//   │ Input channel      │ Nature                     │ Output                   │
 //   ├────────────────────┼────────────────────────────┼──────────────────────────┤
-//   │ 键盘 1~5/0/L       │ 离散选择(toggle)           │ groupPinned[inst]        │
-//   │ 拖拽距离 + 速度    │ 全局连续(0..1)             │ dragAssemble             │
-//   │ 滚轮               │ 全局连续(0..1,第二通道)    │ dragAssemble             │
-//   │ 点击画面区域       │ 离散,空间定位              │ groupPinned[inst]        │
-//   │ 鼠标位置           │ 二维连续,局部              │ window.mouseInfluence()  │
+//   │ Keyboard 1~5/0/L   │ Discrete selection (toggle)│ groupPinned[inst]        │
+//   │ Drag distance+speed│ Global continuous (0..1)   │ dragAssemble             │
+//   │ Scroll wheel       │ Global continuous (0..1,    │ dragAssemble             │
+//   │                    │   second channel)          │                          │
+//   │ Click on a region  │ Discrete, spatial          │ groupPinned[inst]        │
+//   │ Mouse position     │ 2D continuous, local       │ window.mouseInfluence()  │
 //   └────────────────────┴────────────────────────────┴──────────────────────────┘
 //
-// 其中"鼠标位置"是局部空间输入:不影响整体聚合,只让靠近鼠标的图形/粒子
-// 被推开或微微旋转,像水面波纹。其他模块通过 window.mouseInfluence(x,y) 读取。
+// "Mouse position" is a local spatial input: it does not affect the overall
+// assembly, it only pushes away or slightly rotates the shapes/particles near
+// the cursor, like ripples on water. Other modules read it via
+// window.mouseInfluence(x, y).
 //
-// 跨文件依赖(运行时,由 main.js 在加载完毕后提供):
+// Cross-file dependencies (provided at runtime by main.js once loaded):
 //   INSTRUMENTS, USED_AREAS, findInstrumentForPoint(), getMainArtRect()
-//   startAudio() (来自 mechanic-audio.js)
+//   startAudio() (from mechanic-audio.js)
 
 // ============================================================
-//  共享状态
+//  Shared state
 // ============================================================
 const groupPinned = { piano:0, violin:0, guitar:0, musicbox:0 };
 
-let dragStart    = null;        // 拖拽起点(屏幕坐标)
-let dragMoved    = false;       // 移动是否超过阈值(用来区分"点击"和"拖拽")
-let dragAssemble = 0;           // 当前聚合强度 0..1
-let locked       = false;       // 是否锁定当前状态
+let dragStart    = null;        // Drag start point (screen coordinates)
+let dragMoved    = false;       // Whether movement exceeded the threshold (used to tell "click" from "drag")
+let dragAssemble = 0;           // Current assembly strength 0..1
+let locked       = false;       // Whether the current state is locked
 
-// 拖拽速度追踪 — 用来实现"甩动 = forte,慢拖 = piano"
+// Drag velocity tracking — used to implement "flick = forte, slow drag = piano"
 let lastMove     = { x:0, y:0, t:0 };
 let dragVelocity = 0;
 
-const DRAG_THRESHOLD = 5;       // 移动 < 5px 不算拖拽(允许"点击"判定)
+const DRAG_THRESHOLD = 5;       // Movement < 5px is not a drag (allows "click" detection)
 
-// 用户系统偏好:减少动画。无障碍最佳实践。
+// User system preference: reduce motion. Accessibility best practice.
 const prefersReducedMotion =
   window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // ============================================================
-//  HUD - 缓存 DOM 引用,避免每帧 querySelector
-//  延迟初始化:input-mechanic.js 比 main.js 先加载,
-//  此时 INSTRUMENTS 还未定义,所以在第一次 updateHud() 才建立缓存。
+//  HUD - cache DOM references to avoid querySelector every frame.
+//  Lazy init: input-mechanic.js loads before main.js, so INSTRUMENTS
+//  is not defined yet here; the cache is built on the first updateHud() call.
 // ============================================================
 let hudRows = null;
 let hudLock = null;
@@ -77,7 +81,7 @@ function updateHud() {
 }
 
 // ============================================================
-//  鼠标拖拽 / 触摸  —  带速度感应 + 阈值 + 点击区分
+//  Mouse drag / touch  —  with velocity sensing + threshold + click detection
 // ============================================================
 function onDown(e) {
   startAudio();
@@ -89,7 +93,7 @@ function onDown(e) {
 }
 
 function onMove(e) {
-  // 触摸时阻止页面滚动(否则手机拖拽会同时把页面拉走)
+  // On touch, prevent page scrolling (otherwise dragging on mobile drags the page too)
   if (e.touches) e.preventDefault();
   if (!dragStart || prefersReducedMotion) return;
 
@@ -97,20 +101,20 @@ function onMove(e) {
   const now = performance.now();
   const dt  = Math.max(1, now - lastMove.t);
 
-  // 瞬时速度(像素/毫秒)
+  // Instantaneous velocity (pixels/millisecond)
   dragVelocity = Math.hypot(p.x - lastMove.x, p.y - lastMove.y) / dt;
   lastMove     = { x: p.x, y: p.y, t: now };
 
-  // 拖拽距离
+  // Drag distance
   const d = Math.hypot(p.x - dragStart.x, p.y - dragStart.y);
-  if (d < DRAG_THRESHOLD) return;     // 阈值内不算拖拽
+  if (d < DRAG_THRESHOLD) return;     // Within threshold is not a drag
   dragMoved = true;
 
-  // 基础聚合强度(基于距离)
+  // Base assembly strength (based on distance)
   const maxDrag = Math.min(window.innerWidth, window.innerHeight) * 0.30;
   const baseT   = Math.min(1, d / maxDrag);
 
-  // 速度加成:快速甩动会"猛地"增加聚合,模拟乐句的强弱处理
+  // Velocity boost: a fast flick "snaps" the assembly up, mimicking musical dynamics
   const velocityBoost = Math.min(0.25, dragVelocity * 0.015);
 
   const target = Math.min(1, baseT + velocityBoost);
@@ -123,15 +127,15 @@ function onUp() {
   dragStart = null;
   dragMoved = false;
 
-  // 没有拖拽 → 这是一次"点击" → 检查是否点中画面里的乐器区域
+  // No drag → this is a "click" → check whether it hit an instrument region on screen
   if (!wasDragging && startPoint) {
     handleAreaClick(startPoint);
     return;
   }
 
-  // 拖拽释放后衰减。
-  // 改用 requestAnimationFrame 而不是 setInterval,
-  // 避免多次松手时累积多个 interval 导致衰减速度异常。
+  // Decay after releasing a drag.
+  // Use requestAnimationFrame instead of setInterval to avoid stacking up
+  // multiple intervals on repeated releases, which would make decay too fast.
   if (!locked) {
     const decay = () => {
       dragAssemble *= 0.90;
@@ -151,10 +155,11 @@ function pointPos(e) {
 }
 
 // ============================================================
-//  点击画面区域 → 触发对应乐器
-//  利用 main.js 的 USED_AREAS / findInstrumentForPoint():
-//  画面上每个乐器有一组覆盖区(以圆形表示),点中哪个区就触发哪个乐器。
-//  把屏幕坐标先换算回画布设计坐标(1800×1260)再判定。
+//  Click on a region → trigger the matching instrument
+//  Uses main.js's USED_AREAS / findInstrumentForPoint():
+//  each instrument has a set of cover areas (represented as circles) on screen;
+//  whichever area is clicked triggers that instrument.
+//  Screen coordinates are converted back to the design canvas (1800×1260) before testing.
 // ============================================================
 function handleAreaClick(p) {
   if (typeof findInstrumentForPoint !== 'function' ||
@@ -171,43 +176,45 @@ function handleAreaClick(p) {
 }
 
 // ============================================================
-//  滚轮  →  独立于拖拽的第二个连续输入通道
-//  对没有触屏 / 不方便拖拽的用户友好;
-//  笔记本触摸板的双指滚动同样会触发。
+//  Scroll wheel  →  a second continuous input channel, independent of dragging
+//  Friendly for users without a touchscreen / who can't easily drag;
+//  a laptop trackpad's two-finger scroll triggers it too.
 // ============================================================
 document.addEventListener('wheel', e => {
   startAudio();
   if (prefersReducedMotion) return;
-  // deltaY 通常 ±100,乘以小系数让滚动平滑;
-  // 向上滚 → 聚合增加;向下滚 → 聚合减少。
+  // deltaY is usually ±100; multiply by a small factor to smooth the scroll;
+  // scroll up → assembly increases; scroll down → assembly decreases.
   dragAssemble = Math.max(0, Math.min(1, dragAssemble - e.deltaY * 0.001));
   e.preventDefault();
 }, { passive: false });
 
 // ============================================================
-//  ★ 鼠标接近反应 — 把鼠标位置变成"影响力场"
+//  ★ Mouse-proximity reaction — turn mouse position into an "influence field"
 //
-//  这是本机制最重要的新增功能:不需要点击或拖拽,只要鼠标靠近
-//  画面里的图形/粒子,就会让它们被推开 / 微微旋转,像水波纹。
+//  This is the most important new feature of this mechanic: without clicking
+//  or dragging, simply moving the mouse near the shapes/particles on screen
+//  pushes them away / rotates them slightly, like ripples on water.
 //
-//  设计上完全解耦:这里只负责"算出鼠标的影响",不直接修改任何
-//  视觉元素。其他模块(主要是 main.js 里的粒子绘制和乐器变换)
-//  通过 window.mouseInfluence(x, y) 主动查询,得到:
-//    strength : 0..1, 距离越近越大(平方衰减,边缘几乎无效果)
-//    dx, dy   : 从鼠标指向 (x,y) 的单位方向向量(用来"推开")
-//    angle    : 同上,但是弧度(用于旋转)
-//    speed    : 鼠标当前移动速度(可作扰动强度)
+//  Fully decoupled by design: this only computes "the mouse's influence" and
+//  never modifies any visual element directly. Other modules (mainly the
+//  particle drawing and instrument transforms in main.js) actively query it
+//  via window.mouseInfluence(x, y) and receive:
+//    strength : 0..1, larger the closer (quadratic falloff, near-zero at the edge)
+//    dx, dy   : unit direction vector pointing from the mouse to (x, y) (for "pushing away")
+//    angle    : same as above but in radians (for rotation)
+//    speed    : the mouse's current movement speed (can be used as disturbance strength)
 //
-//  这种设计的好处:
-//   - input-mechanic.js 不需要知道 main.js 的内部结构
-//   - 任何新模块都可以直接读取这个力场,不用改 input 代码
-//   - 关掉/调节 RIPPLE_RADIUS 就能整体禁用,无副作用
+//  Benefits of this design:
+//   - input-mechanic.js doesn't need to know main.js's internal structure
+//   - any new module can read this field directly, without changing input code
+//   - disabling/tuning RIPPLE_RADIUS turns the whole thing off with no side effects
 // ============================================================
 const mouse           = { x: -9999, y: -9999, active: false, vx: 0, vy: 0 };
 let   lastMousePos    = { x: 0, y: 0, t: 0 };
 
-const RIPPLE_RADIUS   = 180;     // 影响半径(屏幕像素)
-const RIPPLE_STRENGTH = 1.0;     // 整体强度系数
+const RIPPLE_RADIUS   = 180;     // Influence radius (screen pixels)
+const RIPPLE_STRENGTH = 1.0;     // Overall strength coefficient
 
 document.addEventListener('mousemove', e => {
   const now = performance.now();
@@ -231,7 +238,7 @@ window.mouseInfluence = function(x, y) {
   const dist = Math.hypot(ddx, ddy);
   if (dist > RIPPLE_RADIUS) return empty;
 
-  // 平方衰减:中心强、边缘弱,效果更聚焦
+  // Quadratic falloff: strong at the center, weak at the edge, for a more focused effect
   const t        = 1 - dist / RIPPLE_RADIUS;
   const strength = t * t * RIPPLE_STRENGTH;
 
@@ -244,26 +251,26 @@ window.mouseInfluence = function(x, y) {
   };
 };
 
-// 也直接暴露原始位置,有些模块只需要坐标
+// Also expose the raw position directly; some modules only need the coordinates
 window.mousePos = mouse;
 
 // ============================================================
-//  键盘
-//  - 1/2/3/4: toggle 对应乐器
-//  - 5:      全部聚合
-//  - 0:      回到原图(并解锁)
-//  - L / 空格: 锁定/解锁
-//  改进:
-//   1) 忽略输入框中的按键(防止抢焦点)
-//   2) 忽略系统级"按住自动重复",避免一直按导致 toggle 抖动
+//  Keyboard
+//  - 1/2/3/4: toggle the matching instrument
+//  - 5:      assemble all
+//  - 0:      return to the original artwork (and unlock)
+//  - L / Space: lock / unlock
+//  Improvements:
+//   1) Ignore keys typed inside input fields (avoid stealing focus)
+//   2) Ignore the OS "hold to auto-repeat", which would make the toggle flicker
 // ============================================================
 const keyHeld = {};
 const keyMap  = { '1':'piano', '2':'violin', '3':'guitar', '4':'musicbox' };
 
 document.addEventListener('keydown', e => {
-  // 在输入框/文本域里不抢键(本项目暂无输入框,但属良好实践)
+  // Don't grab keys inside an input/textarea (none in this project, but good practice)
   if (e.target && e.target.matches && e.target.matches('input, textarea')) return;
-  if (keyHeld[e.key]) return;        // 阻止 OS 自动重复造成的多次触发
+  if (keyHeld[e.key]) return;        // Block multiple triggers from OS auto-repeat
   keyHeld[e.key] = true;
 
   startAudio();
@@ -285,16 +292,16 @@ document.addEventListener('keydown', e => {
     locked = !locked;
     if (!locked && !INSTRUMENTS.some(i => groupPinned[i] > 0.5))
       dragAssemble = 0;
-    e.preventDefault();              // 防止空格滚动页面
+    e.preventDefault();              // Prevent Space from scrolling the page
   }
 });
 
 document.addEventListener('keyup', e => { keyHeld[e.key] = false; });
 
 // ============================================================
-//  事件绑定
-//  touchstart / touchmove 显式 passive:false,允许 preventDefault
-//  否则现代浏览器会忽略 preventDefault,导致页面在拖拽时滚动。
+//  Event binding
+//  touchstart / touchmove are explicitly passive:false so preventDefault works;
+//  otherwise modern browsers ignore preventDefault and the page scrolls while dragging.
 // ============================================================
 document.addEventListener('mousedown',  onDown);
 document.addEventListener('mousemove',  onMove);
