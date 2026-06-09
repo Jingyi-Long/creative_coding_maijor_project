@@ -79,13 +79,6 @@ function resetPerlinChannels() {
   }
 }
 
-// ============================================================
-//  【随机种子部分】 满足作业要求 "Perlin noise AND random seed"
-//  - 上面用 noiseSeed(9106) 固定 Perlin 噪声的种子
-//  - 下面 makeRandom(seed) 是一个可设种子的伪随机数发生器(LCG),
-//    给定相同 seed 每次产生相同序列,用于粒子炸开方向、乐器碎片初始位置等。
-//    main.js 里用 makeRandom(20260606)、makeRandom(1000 + i*777) 来生成可复现的随机布局。
-// ============================================================
 function makeRandom(seed) {
   let s = seed >>> 0;
   return function() {
