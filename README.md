@@ -130,9 +130,8 @@ The four mechanics share the same Kandinsky canvas, each controlling a different
 - **Cytowic, R. E.** (2002). *Synesthesia: A union of the senses* (2nd ed.). MIT Press.
 - **Kandinsky, W.** (1946). *Concerning the spiritual in art* (H. Rebay, Trans.). Solomon R. Guggenheim Foundation. (Original work published 1911).
 - **Kandinsky, W.** (1979). *Point and line to plane* (H. Dearstyne & H. Rebay, Trans.). Dover Publications. (Original work published 1926).
-- **Long, J., Cong, Y., Feng, Z., & Xia, X.** (2024). *IDEA9103 Major Project: Reanimating Kandinsky's Composition VIII* [Source code & README]. GitHub. https://github.com/Jingyi-Long/creative_coding_maijor_project
 - **Snibbe, S. S., & Levin, G.** (2001). Interactive dynamic abstraction. *Proceedings of the 14th Annual ACM Symposium on User Interface Software and Technology*, 21–30. https://doi.org/10.1145/502348.502353
-- 
+ 
 ## AI Usage Statement
 We used Claude (Anthropic) to assist with parts of the code.
 
