@@ -97,65 +97,26 @@ This mechanic echoes the project concept in Part 1. We aim to transform Kandinsk
 
 ### User Input — owned by Xiaoyu Xia
 
-The user input mechanic forms a complete input-to-reaction pipeline, translating user interactions — keyboard presses, dragging, scrolling, and cursor movements — into dynamic control signals that shape the entire canvas in real time.
+The user input mechanic translates keyboard presses, dragging, scrolling, and cursor movements into dynamic control signals that reshape the entire canvas in real time. It is grounded in **Kandinsky's theories of synesthesia and "inner necessity"** (Kandinsky, 1911; 1926) — the belief that a single artistic core can be expressed through different visual and auditory forms. Our choice of Pachelbel's *Canon in D*, played through four separate instrument stems each deconstructed and reassembled from the painting, mirrors this belief that different instruments are different spiritual "colours" of the same melodic truth.
  
-### Conceptual Foundation and Visual Design
- 
-The conceptual foundation of this mechanic is deeply rooted in **Wassily Kandinsky's pioneering theories of synesthesia, "inner necessity," and polymorphic expression** (Kandinsky, 1911; 1926). Kandinsky posited that a singular spiritual artistic core can manifest through diverse visual and auditory forms. Driven by this philosophy, **the choice of Pachelbel's *Canon in D* as the musical centerpiece is highly deliberate**. A canon inherently relies on a singular melodic theme layered and polyphonically varied across different voices, leading to countless historic interpretations worldwide. Reinterpreting this single masterpiece through four distinct instrument stems — each uniquely deconstructed and reconstructed from the painting — perfectly mirrors Kandinsky's belief that different instruments represent different spiritual "colours" of a unified artistic truth.
- 
-To achieve absolute geometric precision while respecting Kandinsky's visual language, **I personally drafted, vectorised, and exported all of the patterns, shapes, and final instrument silhouettes within Figma** (see Figure 1). Every instrument silhouette and every colour-filled "deconstructed" instrument used by the runtime — across all four mechanics — originated in my Figma workspace. This directly embodies the creative vision of forms being **"born from the painting"**: the abstract elements of *Composition VIII* are deconstructed at their foundational geometric level and organically reassembled into four unique instrument silhouettes, allowing different visual forms to interpret the same underlying musical canon (Benjamin, 1989). The viewer's drag, click, and key inputs then drive these assets between their dispersed painting state and their fully-assembled instrument state in real time.
+To realise this idea, **I personally designed all the instrument assets in Figma** (see Figure 1): the abstract elements of *Composition VIII* were broken down at their foundational geometric level and reassembled into four playable instrument silhouettes (Benjamin, 1989). The viewer's inputs then drive these assets between their dispersed painting state and their fully-assembled instrument state.
  
 **Figure 1**
 *Figma Asset Blueprint of Instrument Deconstruction and Assembly — designed and exported by Xiaoyu Xia*
  
-![Figma Asset Blueprint — Xiaoyu Xia's deconstruction of Composition VIII into four playable instruments](figma_design_xiaoyu.png)
+![Figma Asset Blueprint by Xiaoyu Xia](readmeImages/figma_design_xiaoyu.png)
  
-*Note.* The original artwork *Composition VIII* (top) is systematically deconstructed at its foundational geometric level and reassembled into four playable musical instruments — **Grand Piano**, **Violin**, **Guitar**, and **Kalimba (Music Box)** — together with their matching clean black silhouettes used as final-state targets. All assets shown here were designed in Figma by Xiaoyu Xia, then exported as SVG for direct ingestion into the p5.js runtime.
+*Note.* The original *Composition VIII* (top) is deconstructed and reassembled into Grand Piano, Violin, Guitar, and Kalimba (Music Box), each with a matching black silhouette as its final-state target. All assets were designed in Figma and exported as SVG for the p5.js runtime.
  
-### Interactive Proximity and Shape Reactions
+When the cursor moves across the canvas, nearby shapes react with distinct behaviours: **circles** breathe and emit glowing ripple rings, **lines** (converted to quadratic Béziers) bend perpendicular to themselves toward the cursor, **triangles** spin faster and warm toward orange, and **rectangles** tilt toward or away from the pointer (Snibbe & Levin, 2001). A custom spring-damper function ensures every shape settles smoothly back to its original layout once the cursor leaves. The mapping also follows Kandinsky's colour–sound synesthesia: yellow regions react energetically (his "trumpet"), blue regions slowly and softly (his "organ"), and red regions in between.
  
-When the mouse moves across the canvas, proximity to different geometric shapes triggers distinct visual reactions in the background layer, creating a tangible sense of dynamic abstraction (Snibbe & Levin, 2001):
+**Clicking anywhere on the canvas** turns the painting into a playable instrument (Cytowic, 2002): a circular ripple wave expands from the click point, momentarily amplifying every shape it passes through, while a short pitched note is synthesised via the Web Audio API — the X-position maps to a C-major pentatonic scale, the Y-position controls the octave. Combined with the keyboard toggles and drag-controlled assembly strength already described in the project's Interaction Instructions, this gives the audience a strong sense of literally "playing" Kandinsky's composition. Accessibility settings are respected throughout: motion-heavy reactions are disabled for users with `prefers-reduced-motion` enabled.
  
-- **Circles / Ellipses:** They expand and breathe with continuous Perlin-like oscillation, emitting a glowing outer ripple ring when the cursor is near or a wave passes (Long et al., 2024, README §User Input).
-- **Lines:** Converted to quadratic Bézier paths at initialization, they bend sideways as the control point deflects perpendicularly to the line, stretching along the line axis toward the cursor (Long et al., 2024, README §User Input).
-- **Triangles:** They spin continuously, with their rotation speed increasing based on proximity, while their fill or stroke colour shifts toward a warm orange (Long et al., 2024, README §User Input).
-- **Rectangles:** They tilt toward or away from the cursor based on its relative position. The closer the cursor is to a shape, the stronger its physical deflection becomes. Custom spring-damper physics with per-axis velocity states are applied via a custom `springTo()` function to ensure all shapes return to their original layout smoothly and naturally when the cursor moves away (Long et al., 2024, README §User Input).
-This per-shape mapping also implements Kandinsky's colour–sound synesthetic associations: yellow regions respond with quick, energetic movements (Kandinsky's "trumpet" association), blue regions react slowly and softly (echoing the organ), and red regions produce moderate, balanced responses in between (Long et al., 2024, README §User Input).
- 
-### The Canvas "Instrument" Click Wave
- 
-To emphasise the experience of interacting with a musical score, a canvas-click feature transforms the static artwork into a performable instrument based on cross-modal synesthetic mapping (Cytowic, 2002):
- 
-- Clicking anywhere on the canvas emits an expanding circular ripple wave from that exact position, computed via a screen-to-design coordinate transform.
-- As the wave front passes each geometric element, it temporarily adds to that shape's reaction strength, causing elements like rectangles to scale up slightly and "flip" via y-scale oscillation.
-- Concurrently, a short pitched note is synthesised via the Web Audio API, where the canvas X-position maps to a specific index on a C-major pentatonic scale, and the Y-position controls the octave shift.
-This creates a powerful sensation of literally **"playing" the canvas**: every click ripples across Kandinsky's composition while generating a unique, harmonious note. While the mouse is moving over the canvas, a soft hover wave is additionally emitted every ~0.16 seconds with opacity scaling based on mouse speed (Long et al., 2024, README §User Input).
- 
-**Figure 2**
-*Interactive Click Wave and Visual Resonances on Canvas*
-*(Visual Render Note.)* Real-time interaction wave front temporarily amplifies the transformation scale of background items and triggers the custom Web Audio oscillator script.
- 
-### Comprehensive Input Channels
- 
-- **Keyboard Toggles:** Pressing **1 / 2 / 3 / 4** toggles the Piano, Violin, Guitar, or Music Box individually. Pressing **5** assembles all instruments simultaneously, **0** unlocks and returns the scene to the original painting, and **L or Space** locks/unlocks the current visual state (Long et al., 2024, README §How to Run).
-- **Velocity-Sensitive Drag & Scroll:** Clicking and dragging controls the global continuous assembly strength from 0 to 1. Fast flicks act as a "forte" gesture that snaps the assembly up dramatically, while slow drags provide a gentle, gradual "piano" transition. A continuous scroll-wheel channel is also supported for laptop trackpad gestures (Long et al., 2024, README §How to Run).
-- **Spatial Target Input:** If a click lands directly inside a known instrument region on the canvas, it toggles only that specific instrument.
-### Technical Optimisations and Considerations
- 
-The module features a purely computational mouse influence field (`window.mouseInfluence`), publishing a queryable API that completely decouples input tracking from visual rendering so other modules can subscribe without altering input code directly. When instruments are fully assembled, background shape reactions intelligently damp to ~35% strength to prevent visual competition with the main elements. To ensure stability, the code suppresses OS key auto-repeat to eliminate flicker, caches HUD DOM references to avoid per-frame queries, relies on a lazy initialisation retry loop to tolerate script loading orders, and respects accessibility settings by disabling intense motion for users with `prefers-reduced-motion` enabled (Long et al., 2024, README §Techniques).
 
 
 ## Part 3: Putting It Together 
 The four mechanics share the same Kandinsky canvas, each controlling a different layer rather than a separate region. Time-based motion sets the underlying rhythm, Perlin noise adds organic variation to positions and colours, audio reshapes the forms through three frequency bands, and user input lets the viewer disturb nearby elements. They influence each other through shared geometric objects, so a single circle can pulse to the bass, drift over time, and still react to the mouse. What holds the piece together is Kandinsky's own logic: one colour palette, the original geometric vocabulary, and his idea of painting as visual music.
 
-### Academic References
- 
-- **Benjamin, A.** (1989). Deconstruction and art/art and deconstruction. In *What is deconstruction?* (pp. 38–47). Academy Editions.
-- **Cytowic, R. E.** (2002). *Synesthesia: A union of the senses* (2nd ed.). MIT Press.
-- **Kandinsky, W.** (1946). *Concerning the spiritual in art* (H. Rebay, Trans.). Solomon R. Guggenheim Foundation. (Original work published 1911).
-- **Kandinsky, W.** (1979). *Point and line to plane* (H. Dearstyne & H. Rebay, Trans.). Dover Publications. (Original work published 1926).
-- **Long, J., Cong, Y., Feng, Z., & Xia, X.** (2024). *IDEA9103 Major Project: Reanimating Kandinsky's Composition VIII* [Source code & README]. GitHub. https://github.com/Jingyi-Long/creative_coding_maijor_project
-- **Snibbe, S. S., & Levin, G.** (2001). Interactive dynamic abstraction. *Proceedings of the 14th Annual ACM Symposium on User Interface Software and Technology*, 21–30. https://doi.org/10.1145/502348.502353
 
 ## External References
  
@@ -165,7 +126,13 @@ The four mechanics share the same Kandinsky canvas, each controlling a different
 - **Google Arts & Culture & Centre Pompidou, *Play a Kandinsky*, 2021** — <https://artsandculture.google.com/experiment/play-a-kandinsky/sgF5ivv105ukhA>
 - **Robert Hodgin, *Ancient Courses of Fictional Rivers*, 2022** — <https://www.artblocks.io/collection/ancient-courses-of-fictional-rivers-by-robert-hodgin> (trail / accumulation inspiration for the time-based mechanic).
 - **Robert Hodgin, Ancient Courses of Fictional Rivers, 2022**, Art Blocks — https://www.artblocks.io/collection/ancient-courses-of-fictional-rivers-by-robert-hodgin — used as inspiration for generative visual movement, layered particle aesthetics, and time-based accumulation.
-
+- **Benjamin, A.** (1989). Deconstruction and art/art and deconstruction. In *What is deconstruction?* (pp. 38–47). Academy Editions.
+- **Cytowic, R. E.** (2002). *Synesthesia: A union of the senses* (2nd ed.). MIT Press.
+- **Kandinsky, W.** (1946). *Concerning the spiritual in art* (H. Rebay, Trans.). Solomon R. Guggenheim Foundation. (Original work published 1911).
+- **Kandinsky, W.** (1979). *Point and line to plane* (H. Dearstyne & H. Rebay, Trans.). Dover Publications. (Original work published 1926).
+- **Long, J., Cong, Y., Feng, Z., & Xia, X.** (2024). *IDEA9103 Major Project: Reanimating Kandinsky's Composition VIII* [Source code & README]. GitHub. https://github.com/Jingyi-Long/creative_coding_maijor_project
+- **Snibbe, S. S., & Levin, G.** (2001). Interactive dynamic abstraction. *Proceedings of the 14th Annual ACM Symposium on User Interface Software and Technology*, 21–30. https://doi.org/10.1145/502348.502353
+- 
 ## AI Usage Statement
 We used Claude (Anthropic) to assist with parts of the code.
 
