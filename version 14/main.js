@@ -1,4 +1,4 @@
-/ main.js — assembly / render layer (glue)
+// main.js — assembly / render layer (glue)
 //
 // AI acknowledgement (Claude / Anthropic): the split into per-mechanic files
 // (mechanic-audio / mechanic-time / perlin-noise / input-mechanic + this thin main.js)
