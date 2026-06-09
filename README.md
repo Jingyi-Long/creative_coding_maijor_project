@@ -89,9 +89,9 @@ The user does not directly interact with this mechanic, but instead experiences 
 ![An image of sketch](readmeImages/Sketch.jpg)
 
 ### Perlin Noise & Randomness — owned by Zichen Feng
-This mechanic uses Perlin noise and random numbers to create smooth and organic dynamic effects. Inspired by the rhythm and geometric balance in Kandinsky's "Composition VIII", the circles, lines and particles in the picture will slowly float, rotate and constantly change positions. Compared with completely random movements, Perlin noise can produce more natural and smooth change effects, making the entire picture look more alive and fluid, rather than chaotic. 
-The audience will experience this mechanic by observing the constantly changing dynamic environment. Random numbers and random seeds will affect color changes, particle generation, and graphic distribution, making the work continuously evolve and each presentation slightly different. The audience can feel the constantly changing visual rhythm and spatial relationship between geometric elements. 
-This mechanic echoes the project concept in Part 1. We aim to transform Kandinsky's originally static abstract paintings into a dynamic and immersive digital art space. Perlin noise and random variations further enhance the sense of movement, rhythm and musicality in the work, allowing the image to flow and change continuously like music.
+This mechanism utilises p5.js’s Perlin noise to create **smooth, natural dynamic effects**. In this project, Perlin noise primarily controls the slight floating of instruments once formed, the drifting motion of circular particles, and the faint, breathing halo around the instruments. Compared to completely random movement, the variations in Perlin noise are more continuous, making the animation appear softer and more lifelike.
+
+Random numbers are primarily used to set the particles’ **initial size, position, opacity and distribution**. When the user drags the screen, certain background elements coalesce to form musical instruments, whilst the elements that have been used dissipate in the form of layered circular particles. This mechanism helps us transform Kandinsky’s originally static geometric compositions into an interactive audiovisual experience characterised by a sense of **movement, rhythm and musicality**.
 
 ![An image of sketch](readmeImages/sketch.png)
 
