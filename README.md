@@ -18,18 +18,34 @@ We transform this static abstract painting into a dynamic interactive artwork wh
 
 ---
 
-## How to Run & Interaction Instructions
- 
-1. Open the final project folder (`version 10/…`) in VS Code and run **`index.html` with Live Server**. The project loads local audio and SVG files, so it must be **served** (Live Server / a local server), not opened directly as a file.
-2. **Click anywhere on the page once.** Browsers block audio until a user gesture, so this first click starts the synchronised soundtrack and the timed intro.
-3. **Watch the intro:** the painting's shapes first appear as outlines, then fill with colour as the saturation gradually rises.
-4. **Interact:**
-   - **Drag the mouse** to gather the shapes into the instruments; **release** to let them return.
-   - Press **1 / 2 / 3 / 4** to summon Piano / Violin / Guitar / Music box individually.
-   - Press **5** to gather all instruments, **0** to return to the painting.
-   - Press **L** or **Space** to lock / unlock the current state.
-5. The time-based sequence runs on a roughly **98-second loop** and then resets automatically.
-The piece is responsive — it re-scales when the browser window is resized.
+## How to Run
+
+1. The project loads local audio (`.mp3`) and SVG files, so it must be **served**, not opened directly as a `file://` page. In VS Code, open the `version 14` folder and run `index.html` with the **Live Server** extension (or any local web server).
+2. Wait for the audio to finish loading — the on-screen indicator changes from `audio loading …%` to `♪ click to start canon`.
+3. **Click anywhere once** (or press any key, or start dragging). Browsers block audio until a user gesture, so this first interaction starts the synchronised *Canon in D* soundtrack and the timed sequence.
+4. The piece is responsive and re-scales when the browser window is resized.
+
+## Interaction Instructions
+
+The work layers four mechanics on one canvas — some run on their own, others respond to you.
+
+**Just watch (Time-based + Audio):**
+- After the first interaction, the painting plays through a roughly **98-second timed sequence**: shapes appear as outlines, fill with colour as saturation rises, oscillate at the climax, then fade out and loop.
+- The instruments react to the music in real time — each one's **brightness and colour flicker** with its own frequency band of the soundtrack.
+
+**Mouse / trackpad:**
+- **Move the mouse** over the painting — nearby shapes respond to the cursor: circles breathe and ripple, lines bend and stretch, triangles spin and warm toward orange, rectangles tilt. Background particles drift away from the cursor and the formed instruments lean toward it.
+- **Drag** (hold and move) to gather the composition into the four instruments; **release** to let it return. A fast flick assembles strongly (*forte*); a slow drag is gentle (*piano*).
+- **Scroll / two-finger swipe** is a second way to control the same assembly — handy on a trackpad.
+- **Click** anywhere to send an expanding ripple across the shapes and play a short note (its pitch follows the horizontal click position on a C-major pentatonic scale, its octave the vertical position). Clicking inside a specific instrument's area toggles just that instrument.
+
+**Keyboard:**
+- **1 / 2 / 3 / 4** — show / hide Piano / Violin / Guitar / Music box individually.
+- **5** — gather all four instruments at once.
+- **0** — return to the original Composition VIII.
+- **L** or **Space** — lock / unlock the current state.
+
+*Accessibility: if your system has "reduce motion" enabled, the drag and mouse-proximity reactions are automatically disabled.*
 
 
 ---
