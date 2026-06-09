@@ -126,6 +126,9 @@ The four mechanics share the same Kandinsky canvas, each controlling a different
 - **Google Arts & Culture & Centre Pompidou, *Play a Kandinsky*, 2021** — <https://artsandculture.google.com/experiment/play-a-kandinsky/sgF5ivv105ukhA>
 - **Robert Hodgin, *Ancient Courses of Fictional Rivers*, 2022** — <https://www.artblocks.io/collection/ancient-courses-of-fictional-rivers-by-robert-hodgin> (trail / accumulation inspiration for the time-based mechanic).
 - **Robert Hodgin, Ancient Courses of Fictional Rivers, 2022**, Art Blocks — https://www.artblocks.io/collection/ancient-courses-of-fictional-rivers-by-robert-hodgin — used as inspiration for generative visual movement, layered particle aesthetics, and time-based accumulation.
+
+## Academic References
+
 - **Benjamin, A.** (1989). Deconstruction and art/art and deconstruction. In *What is deconstruction?* (pp. 38–47). Academy Editions.
 - **Cytowic, R. E.** (2002). *Synesthesia: A union of the senses* (2nd ed.). MIT Press.
 - **Kandinsky, W.** (1946). *Concerning the spiritual in art* (H. Rebay, Trans.). Solomon R. Guggenheim Foundation. (Original work published 1911).
