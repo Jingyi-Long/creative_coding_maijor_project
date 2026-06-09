@@ -1,4 +1,9 @@
-// main.js — 总装/渲染层(胶水)
+/ main.js — assembly / render layer (glue)
+//
+// AI acknowledgement (Claude / Anthropic): the split into per-mechanic files
+// (mechanic-audio / mechanic-time / perlin-noise / input-mechanic + this thin main.js)
+// was set up with help from Claude. main.js holds the shared state and the render loop;
+// each mechanic file reads/writes that shared state.
 
 const INSTRUMENTS = ['piano', 'violin', 'guitar', 'musicbox'];
 
@@ -479,11 +484,9 @@ function setupInstrumentSvg(inst, svgText) {
 }
 
 
-// ============================================================
 //  Perlin breathing glow
-//  用 p5.js noise() 生成很淡的“呼吸光晕”。
-//  它只在乐器形成后出现，位于乐器下方，不抢主体。
-// ============================================================
+//  Uses p5.js noise() to generate a very faint "breathing glow".
+//  It only appears after the instruments have formed, sits below them, and does not steal focus.
 const GLOW_STYLE = {
   piano:    { colour: 'rgba(168,120,184,', seed: 11.3, size: 0.92 },
   violin:   { colour: 'rgba(201,162,58,',  seed: 31.7, size: 0.86 },
@@ -599,7 +602,14 @@ function updateInstrumentVisual(inst, s) {
 
   const _gf2 = window.__globalFade ?? 1;
   view.wrap.style.opacity = s < 0.015 ? 0 : clamp(s * s * 1.5 * _gf2, 0, 0.65);
-
+  
+  // AI acknowledgement (Claude / Anthropic): the audio-reactive flicker below was
+  // written with help from Claude — it reads the per-instrument audio level from
+  // window.audioBands (published by mechanic-audio.js), smooths it with a fast-attack /
+  // slow-release follower, and folds that level (f) into the instrument's brightness /
+  // saturation / glow filter. (Combining it here with the time mechanic's __timeSat and
+  // the assembly amount s is our own work.)
+  
   const band       = (window.audioBands && window.audioBands[inst]) || 0;
   const audioTarget = band * smoothstep(0.2, 0.7, s);
   if (view.flicker === undefined) view.flicker = 0;
