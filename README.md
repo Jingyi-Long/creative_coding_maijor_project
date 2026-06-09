@@ -86,9 +86,6 @@ During the climax, motion and layering reach their highest intensity. Shapes osc
 
 The user does not directly interact with this mechanic, but instead experiences the artwork continuously evolving over time.
 
-![An image of sketch](readmeImages/Sketch.jpg)
-
-### Perlin Noise & Randomness — owned by Zichen Feng
 ### Perlin Noise & Randomness — owned by Zichen Feng
 This mechanism utilises p5.js’s Perlin noise to create **smooth, natural dynamic effects**. In this project, Perlin noise primarily controls the **slight floating of instruments once formed, the drifting motion of circular particles**, and the faint, breathing halo around the instruments. Compared to completely random movement, the variations in Perlin noise are more continuous, making the animation appear softer, more organic and more lifelike.
 
@@ -96,7 +93,6 @@ Random numbers are mainly used to set the particles’ **initial size, position,
 
 The breathing halo around each formed instrument also supports the musical feeling of the work. It suggests that the instruments are not static objects, but active visual elements that respond to rhythm and movement. Through this mechanic, Kandinsky’s originally static geometric composition is transformed into an **interactive audiovisual experience characterised by movement, rhythm, spatial depth and musicality**
 
-![An image of sketch](readmeImages/sketch.png)
 
 ### User Input — owned by Xiaoyu Xia
 
