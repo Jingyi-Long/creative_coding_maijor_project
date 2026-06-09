@@ -1,4 +1,4 @@
-// input-mechanic.js — 【Mechanic: User input】
+// mechanic-userinput.js — 【Mechanic: User input】
 // Creative director: Xiaoyu Xia
 // * User Input Mechanic — IDEA9103 Major Project
 // Author: Xiaoyu Xia (xxia0518)
