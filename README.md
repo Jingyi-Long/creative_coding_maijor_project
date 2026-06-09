@@ -89,9 +89,12 @@ The user does not directly interact with this mechanic, but instead experiences 
 ![An image of sketch](readmeImages/Sketch.jpg)
 
 ### Perlin Noise & Randomness — owned by Zichen Feng
-This mechanism utilises p5.js’s Perlin noise to create **smooth, natural dynamic effects**. In this project, Perlin noise primarily controls the slight floating of instruments once formed, the drifting motion of circular particles, and the faint, breathing halo around the instruments. Compared to completely random movement, the variations in Perlin noise are more continuous, making the animation appear softer and more lifelike.
+### Perlin Noise & Randomness — owned by Zichen Feng
+This mechanism utilises p5.js’s Perlin noise to create **smooth, natural dynamic effects**. In this project, Perlin noise primarily controls the **slight floating of instruments once formed, the drifting motion of circular particles**, and the faint, breathing halo around the instruments. Compared to completely random movement, the variations in Perlin noise are more continuous, making the animation appear softer, more organic and more lifelike.
 
-Random numbers are primarily used to set the particles’ **initial size, position, opacity and distribution**. When the user drags the screen, certain background elements coalesce to form musical instruments, whilst the elements that have been used dissipate in the form of layered circular particles. This mechanism helps us transform Kandinsky’s originally static geometric compositions into an interactive audiovisual experience characterised by a sense of **movement, rhythm and musicality**.
+Random numbers are mainly used to set the particles’ **initial size, position, opacity and distribution**, so the visual result does not look too repetitive. When the user drags the screen, selected background elements gradually coalesce to form musical instruments, while the elements that have been used dissipate into layered circular particles. These particles do not move in a harsh or mechanical way; instead, Perlin noise gives them a gentle drifting quality, similar to floating dust or sound waves spreading through space.
+
+The breathing halo around each formed instrument also supports the musical feeling of the work. It suggests that the instruments are not static objects, but active visual elements that respond to rhythm and movement. Through this mechanic, Kandinsky’s originally static geometric composition is transformed into an **interactive audiovisual experience characterised by movement, rhythm, spatial depth and musicality**
 
 ![An image of sketch](readmeImages/sketch.png)
 
