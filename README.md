@@ -1,6 +1,6 @@
 # IDEA9103 Major Project 
 
-## Part 1: Project Overview
+## Project Overview
 An interactive audiovisual reinterpretation of Wassily Kandinsky's Composition VIII (1923), built with p5.js. The static painting is rebuilt from SVG geometry and then brought to life: over a timed sequence the shapes draw themselves in and gain colour, the viewer can gather the composition into four musical instruments, and the whole scene reacts in real time to a synchronised recording of Pachelbel's Canon in D. Four mechanics — Audio, Time-based, Perlin noise & randomness, and User input — each drive a different layer of the same canvas.
 
 ## Inspiration
@@ -132,8 +132,18 @@ When the cursor moves across the canvas, nearby shapes react with distinct behav
   develop and refine these beyond-course elements.
  
 
-## Part 3: Putting It Together 
-The four mechanics share the same Kandinsky canvas, each controlling a different layer rather than a separate region. Time-based motion sets the underlying rhythm, Perlin noise adds organic variation to positions and colours, audio reshapes the forms through three frequency bands, and user input lets the viewer disturb nearby elements. They influence each other through shared geometric objects, so a single circle can pulse to the bass, drift over time, and still react to the mouse. What holds the piece together is Kandinsky's own logic: one colour palette, the original geometric vocabulary, and his idea of painting as visual music.
+## How the Mechanics Work Together
+
+The four mechanics share the same Kandinsky canvas, each controlling a different layer
+rather than a separate region. Time-based motion sets the underlying rhythm, Perlin
+noise adds organic variation to the shapes' positions and floating motion, audio drives
+the brightness and colour of the instruments through four frequency bands (one per
+instrument), and user input lets the viewer gather the shapes and disturb nearby
+elements. They influence each other through the same shared canvas, so a formed
+instrument can brighten with its own part of the music while the painting's shapes drift
+over time and still react to the mouse. What holds the piece together is Kandinsky's own
+logic: one colour palette, the original geometric vocabulary, and his idea of painting
+as visual music.
 
 
 ## External References
