@@ -168,3 +168,5 @@ The four mechanics share the same Kandinsky canvas, each controlling a different
 We used Claude (Anthropic) to assist with parts of the code.
 
 Yuming Cong used ChatGPT to generate the image of the sketch.
+
+Zichen Feng used ChatGPT to support idea development, code troubleshooting, and wording refinement.
